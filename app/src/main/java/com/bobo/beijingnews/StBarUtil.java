@@ -1,4 +1,4 @@
-package bobo.com.beijingnews;
+package com.bobo.beijingnews;
 
 import android.app.Activity;
 import android.graphics.Color;
