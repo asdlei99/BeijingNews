@@ -11,7 +11,7 @@ import bobo.com.beijingnews.R;
 
 /**
  * Created by 求知自学网 on 2019/5/19. Copyright © Leon. All rights reserved.
- * Functions: 用来处理 （例如）HomeFragmnet 沉浸式导航栏的问题
+ * Functions: 用来处理 （例如）HomeFragmnet 沉浸式导航栏的 问题
  */
 public class StBarUtil {
 
