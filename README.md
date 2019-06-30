@@ -1,4 +1,7 @@
 # BeijingNews
 波波京闻（仿北京新闻）
 
-<img src="https://github.com/leonInShanghai/BeijingNews/blob/master/app/src/main/ic_launcher-web.png"/>
+<div align="center">
+<img src="https://github.com/leonInShanghai/BeijingNews/blob/master/app/src/main/res/drawable-hdpi/splash_sheep_newyear.png"
+ style="border: 1px solid #000;"/>
+<div />
