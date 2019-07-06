@@ -8,6 +8,7 @@
     android:background="@drawable/splash_bg_newyear"
     tools:context=".SplashActivity">
 
+    <!--沉浸式导航栏顶替状态栏的view-->
     <View
         android:id="@+id/Occupation"
         android:layout_width="match_parent"

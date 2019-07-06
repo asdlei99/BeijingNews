@@ -2,6 +2,7 @@ package com.bobo.beijingnews;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -9,15 +10,19 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import com.bobo.beijingnews.activity.GuideActivity;
 
-import com.bobo.beijingnews.R;
+import com.bobo.beijingnews.utils.CacheUtils;
+import com.bobo.beijingnews.utils.StBarUtil;
 
 /**
  * Created by 求知自学网 on 2019/6/30 Copyright © Leon. All rights reserved.
  * Functions: app的启动页  https://geekpark.site/
  */
 public class SplashActivity extends Activity {
+
+    /**本地持久化保存 是否进入过首页的key*/
+    public static final String START_MAIN = "start_main";
 
     private RelativeLayout rl_splash_root;
 
@@ -77,10 +82,29 @@ public class SplashActivity extends Activity {
 
         }
 
+        /**
+         * 动画播放结束 回调这个方法
+         * @param animation
+         */
         @Override
         public void onAnimationEnd(Animation animation) {
-            //动画播放结束
-            Toast.makeText(SplashActivity.this,"动画播放结束",Toast.LENGTH_SHORT).show();
+
+            //判断是否进入过主页面 (抽取静态常量 CTRL + ait + C)
+            boolean isStartMain = CacheUtils.getBoolean(SplashActivity.this,START_MAIN);
+
+            if (isStartMain){
+                //如果进入过主页面直接进入主页面
+
+            }else {
+                //如果没有进入过主页面，进入引导页面
+                Intent intent = new Intent(SplashActivity.this,GuideActivity.class);
+                startActivity(intent);
+            }
+
+            //关闭splash页面
+            finish();
+
+            //Toast.makeText(SplashActivity.this,"动画播放结束",Toast.LENGTH_SHORT).show();
         }
 
         @Override

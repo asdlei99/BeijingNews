@@ -1,13 +1,13 @@
-package com.bobo.beijingnews;
+package com.bobo.beijingnews.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import bobo.com.beijingnews.R;
+import com.bobo.beijingnews.R;
+
 
 /**
  * Created by 求知自学网 on 2019/5/19. Copyright © Leon. All rights reserved.
@@ -16,7 +16,11 @@ import bobo.com.beijingnews.R;
 public class StBarUtil {
 
 
-    //不用在style的xml文件中设置透明了这个方法会直接抹去状态栏 方法二
+    /**
+     * 不用在style的xml文件中设置透明了这个方法会直接抹去状态栏 方法二
+     * @param activity activity 中传this fragment中传 宿主activity
+     * @param itemView  fragment 中打气筒的view  activity传null
+     */
     public final static void setOccupationHeight(Activity activity,View itemView){
 
         //想要设置沉浸式状态栏的activity中都创建一个view 高度为状态栏高度 设置成自己想要的颜色
