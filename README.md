@@ -1,6 +1,8 @@
 # BeijingNews
 波波京闻（仿北京新闻）
 
+感谢以下开源 组织 机构 个人：jfeinstein10/SlidingMenu
+
 <div align="center">
 <img src="https://github.com/leonInShanghai/BeijingNews/blob/master/app/src/main/res/drawable-hdpi/splash_sheep_newyear.png?raw=true"
 style="border: 1px solid #ff0000;"/>

@@ -2,6 +2,7 @@ package com.bobo.beijingnews.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bobo.beijingnews.R;
+import com.bobo.beijingnews.SplashActivity;
+import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.DensityUtil;
 import com.bobo.beijingnews.utils.LELog;
 import com.bobo.beijingnews.utils.StBarUtil;
@@ -42,6 +45,8 @@ public class GuideActivity extends Activity {
     //两个灰色点间距 = 第一个点距离左边的距离 - 第0个点距离左边的距离
     private int leftmax;
 
+    private int widthdpi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +63,9 @@ public class GuideActivity extends Activity {
 
         //准备数据(3张引导图)
         int[] ids = new int[]{R.drawable.guide_1,R.drawable.guide_2,R.drawable.guide_3};
+
+        //dp转成像素 灰点的宽高
+        widthdpi = DensityUtil.dip2px(this,10);
 
         imageViews = new ArrayList<>();
 
@@ -81,14 +89,12 @@ public class GuideActivity extends Activity {
             //设置背景为灰色 成为灰色小点
             point.setBackgroundResource(R.drawable.point_normal);
             //用Java代码设置布局  LayoutParams(int width, int height) 注意单位要设置dp转成像素
-            int width = DensityUtil.dip2px(this,10.0f);
-            int height = DensityUtil.dip2px(this,10.0f);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width,height);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthdpi,widthdpi);
 
             //设置灰色点之间的间距 第一个（数组中下标为0）的不要设置
             if (i != 0){
                 //设置左边距 10dp
-                params.leftMargin = width;
+                params.leftMargin = widthdpi;
             }
 
             point.setLayoutParams(params);
@@ -105,6 +111,23 @@ public class GuideActivity extends Activity {
 
         //得到viewpager屏幕滑动的百分比
         viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
+
+        //设置按钮的点击事件
+        btn_start_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //1.保存进入过主页面的持久化变量为true
+                CacheUtils.putBoolean(GuideActivity.this, SplashActivity.START_MAIN,true);
+
+                //2.跳转到主页面
+                Intent intent = new Intent(GuideActivity.this,MainActivity.class);
+                startActivity(intent);
+
+                //3.关闭引导（本）页面
+                finish();
+            }
+        });
     }
 
     //监听view pager 屏幕滑动的内部类
@@ -151,7 +174,14 @@ public class GuideActivity extends Activity {
          */
         @Override
         public void onPageSelected(int position) {
-
+            //用户选中最后一页的时候让“开始体验”按钮显示
+            if (position == imageViews.size() - 1){
+                //最后一个页面显示
+                btn_start_main.setVisibility(View.VISIBLE);
+            }else{
+                //其他页面隐藏
+                btn_start_main.setVisibility(View.GONE);
+            }
         }
 
         /**

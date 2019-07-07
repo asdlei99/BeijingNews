@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fl_main_content"
+    tools:context=".activity.MainActivity">
+
+    <!--这里的内容（帧布局）是要被替换为fragment的占位而已-->
+
+    <!--fragment 替换后这里仍然会显示-->
+    <!--<TextView-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="我是主页面"-->
+        <!--android:textSize="25sp"-->
+        <!--android:textColor="#ff0000"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+</FrameLayout>

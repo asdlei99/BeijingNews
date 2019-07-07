@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fl_leftmenu"
+    android:background="#44000000">
+
+    <!--这里的内容（帧布局）是要被替换为fragment的占位而已-->
+
+    <!--fragment 替换后这里仍然会显示-->
+    <!--<TextView-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="我是左侧菜单"-->
+        <!--android:textSize="25sp"-->
+        <!--android:textColor="#ff0000"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+</FrameLayout>

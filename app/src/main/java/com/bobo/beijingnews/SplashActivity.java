@@ -12,6 +12,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 import com.bobo.beijingnews.activity.GuideActivity;
 
+import com.bobo.beijingnews.activity.MainActivity;
 import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.StBarUtil;
 
@@ -92,14 +93,18 @@ public class SplashActivity extends Activity {
             //判断是否进入过主页面 (抽取静态常量 CTRL + ait + C)
             boolean isStartMain = CacheUtils.getBoolean(SplashActivity.this,START_MAIN);
 
+            Intent intent;
             if (isStartMain){
                 //如果进入过主页面直接进入主页面
-
+                intent = new Intent(SplashActivity.this,MainActivity.class);
+                //startActivity(intent);
             }else {
                 //如果没有进入过主页面，进入引导页面
-                Intent intent = new Intent(SplashActivity.this,GuideActivity.class);
-                startActivity(intent);
+                intent = new Intent(SplashActivity.this,GuideActivity.class);
+                //startActivity(intent);
             }
+
+            startActivity(intent);
 
             //关闭splash页面
             finish();
