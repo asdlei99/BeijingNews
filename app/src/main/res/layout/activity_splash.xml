@@ -10,7 +10,7 @@
 
     <!--沉浸式导航栏顶替状态栏的view-->
     <View
-        android:id="@+id/Occupation"
+        android:id="@+id/occupation"
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 

@@ -25,6 +25,10 @@ import com.bobo.beijingnews.utils.StBarUtil;
 
 import java.util.ArrayList;
 
+/**
+ * Created by 求知自学网 on 2019/7/20 Copyright © Leon. All rights reserved.
+ * Functions: 用户首次打开app的引导页 只出现一次
+ */
 public class GuideActivity extends Activity {
 
     //显示可左划内容的 容器

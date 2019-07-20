@@ -8,10 +8,14 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-        
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        /**
+         * 解决导入xUtils3 报错com.github.dcendents.android-maven' not found.
+         * No service of type Factory<LoggingManagerInternal> available in ProjectScope
+         * classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5' 用小于1.5的解决不了问题
+         */
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 

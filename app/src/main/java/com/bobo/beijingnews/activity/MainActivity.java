@@ -1,13 +1,19 @@
 package com.bobo.beijingnews.activity;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.bobo.beijingnews.R;
 import com.bobo.beijingnews.fragment.ContentFragment;
 import com.bobo.beijingnews.fragment.LeftmenuFragment;
 import com.bobo.beijingnews.utils.DensityUtil;
+import com.bobo.beijingnews.utils.StBarUtil;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -35,6 +41,17 @@ public class MainActivity extends SlidingFragmentActivity {
 
         //1.设置主页面 侧滑菜单栏右边的页面是主页面
         setContentView(R.layout.activity_main);
+
+        /**
+         * SlidingFragmentActivity 要这样才能消掉 状态栏
+         * https://blog.csdn.net/weixin_33682790/article/details/86934571
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
+            this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);//显示状态栏
+        }
+
 
         //2.设置左侧菜单
         setBehindContentView(R.layout.activity_leftmenu);

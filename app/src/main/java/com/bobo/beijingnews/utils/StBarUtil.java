@@ -26,9 +26,9 @@ public class StBarUtil {
         //想要设置沉浸式状态栏的activity中都创建一个view 高度为状态栏高度 设置成自己想要的颜色
         View view;
         if (itemView != null){
-            view = itemView.findViewById(R.id.Occupation);
+            view = itemView.findViewById(R.id.occupation);
         }else{
-            view = activity.findViewById(R.id.Occupation);
+            view = activity.findViewById(R.id.occupation);
         }
 
 
@@ -42,10 +42,12 @@ public class StBarUtil {
                 params.height = getStatusBarHeight(activity);
                 view.setLayoutParams(params);
             }
+
             View decorView = activity.getWindow().getDecorView();
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+
         }else {
             //低版本不适配沉浸式状态栏所以要隐藏
             if (view != null){
@@ -58,7 +60,7 @@ public class StBarUtil {
     /**
      * 获得状态栏的高度
      */
-    private static int getStatusBarHeight(Activity activity) {
+    public static int getStatusBarHeight(Activity activity) {
         int result = 0;
         int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {

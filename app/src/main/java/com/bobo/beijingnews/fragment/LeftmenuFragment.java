@@ -35,8 +35,6 @@ public class LeftmenuFragment extends BaseFragment {
         //设置沉浸式状态栏
         //StBarUtil.setOccupationHeight(this,null);
 
-
-
         return textView;
     }
 
