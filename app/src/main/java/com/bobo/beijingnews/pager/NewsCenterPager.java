@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import com.bobo.beijingnews.base.BasePager;
+import com.bobo.beijingnews.utils.LogUtil;
 
 /**
  * Created by 求知自学网 on 2019/7/20. Copyright © Leon. All rights reserved.
@@ -20,6 +21,9 @@ public class NewsCenterPager extends BasePager {
     @Override
     public void initData() {
         super.initData();
+
+        LogUtil.e("新闻中心数据被加载了");
+
 
         //1.设置标题
         tv_title.setText("新闻中心");

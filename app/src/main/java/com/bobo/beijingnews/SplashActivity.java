@@ -18,7 +18,7 @@ import com.bobo.beijingnews.utils.StBarUtil;
 
 /**
  * Created by 求知自学网 on 2019/6/30 Copyright © Leon. All rights reserved.
- * Functions: app的启动页  https://geekpark.site/
+ * Functions: app的启动页
  */
 public class SplashActivity extends Activity {
 

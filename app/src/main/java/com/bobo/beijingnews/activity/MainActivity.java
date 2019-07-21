@@ -43,7 +43,7 @@ public class MainActivity extends SlidingFragmentActivity {
         setContentView(R.layout.activity_main);
 
         /**
-         * SlidingFragmentActivity 要这样才能消掉 状态栏
+         * SlidingFragmentActivity 要这样才能消掉 状态栏 消掉状态栏后左右两部分自己添加
          * https://blog.csdn.net/weixin_33682790/article/details/86934571
          */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

@@ -22,10 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.GuideActivity" />
-
-        <!--Java中设置 沉浸导航栏无效在这设置成-->
-        <activity android:name=".activity.MainActivity"
-            />
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

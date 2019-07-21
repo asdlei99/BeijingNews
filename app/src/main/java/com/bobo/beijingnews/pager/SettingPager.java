@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import com.bobo.beijingnews.base.BasePager;
+import com.bobo.beijingnews.utils.LogUtil;
 
 /**
  * Created by 求知自学网 on 20设置中心9/7/20. Copyright © Leon. All rights reserved.
@@ -20,6 +21,8 @@ public class SettingPager extends BasePager {
     @Override
     public void initData() {
         super.initData();
+
+        LogUtil.e("设置中心数据被加载了");
 
         //设置中心.设置标题
         tv_title.setText("设置中心");
