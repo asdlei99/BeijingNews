@@ -101,6 +101,11 @@ public class ContentFragment extends BaseFragment {
         isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
     }
 
+    //供外界调用 获取NewsCenterPager的方法
+    public NewsCenterPager getNewsCenterPager() {
+        return (NewsCenterPager) basePagers.get(1);
+    }
+
     //内部类实现 viewpager 页面改变的接口
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener{
 

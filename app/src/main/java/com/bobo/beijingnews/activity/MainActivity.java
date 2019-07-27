@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -56,7 +57,7 @@ public class MainActivity extends SlidingFragmentActivity {
         //2.设置左侧菜单
         setBehindContentView(R.layout.activity_leftmenu);
 
-        //3.设置右侧菜单
+        //3.设置滑动菜单
         SlidingMenu slidingMenu = getSlidingMenu();
         //slidingMenu.setSecondaryMenu(R.layout.activity_rightmenu);设置第二菜单 右侧划菜单
 
@@ -90,5 +91,17 @@ public class MainActivity extends SlidingFragmentActivity {
         ft.commit();
     }
 
+    //供外界调用获取左侧菜单的方法
+    public LeftmenuFragment getLeftmenuFragment() {
+        //1.得到fragmentmanger
+       // FragmentManager fm = getSupportFragmentManager();
+        //LeftmenuFragment leftmenuFragment = (LeftmenuFragment) fm.findFragmentByTag(LEFTMENU_TAG);
 
+        return  (LeftmenuFragment) getSupportFragmentManager().findFragmentByTag(LEFTMENU_TAG);
+    }
+
+    //供外界调用获取右侧内容的方法
+    public ContentFragment getContentFragment() {
+        return  (ContentFragment) getSupportFragmentManager().findFragmentByTag(MAIN_CONTENT_TAG);
+    }
 }

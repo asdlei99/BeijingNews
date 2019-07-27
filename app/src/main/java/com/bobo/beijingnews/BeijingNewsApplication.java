@@ -17,8 +17,8 @@ public class BeijingNewsApplication extends Application {
         super.onCreate();
 
         //初始化xUtils3
-        //x.Ext.init(this);
+        x.Ext.init(this);
         // 是否输出debug日志, 开启debug会影响性能.
-        //x.Ext.setDebug(true);
+        x.Ext.setDebug(true);
     }
 }

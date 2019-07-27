@@ -1,7 +1,7 @@
 # BeijingNews
 波波京闻（仿北京新闻）
 
-感谢以下开源 组织 机构 个人：尚硅谷 jfeinstein10/SlidingMenu wyouflf/xUtils3
+感谢以下开源 组织 机构 个人：尚硅谷 jfeinstein10/SlidingMenu wyouflf/xUtils3 Gson(谷歌)
 
 <div align="center">
 <img src="https://github.com/leonInShanghai/BeijingNews/blob/master/app/src/main/res/drawable-hdpi/splash_sheep_newyear.png?raw=true"

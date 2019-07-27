@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bobo.beijingnews.R;
+import com.bobo.beijingnews.activity.MainActivity;
 import com.bobo.beijingnews.utils.StBarUtil;
 
 /**
@@ -67,6 +68,17 @@ public class BasePager {
         ib_menu = (ImageButton)view.findViewById(R.id.ib_menu);
         fl_content = (FrameLayout)view.findViewById(R.id.fl_content);
         occupation = (View)view.findViewById(R.id.occupation);
+
+        //点击侧划的按钮 只有部分子页面需要显示 的点击事件（打开/关闭左侧菜单）
+        ib_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //把左侧菜单关闭
+                MainActivity mainActivity = (MainActivity)context;
+                //toggle 你是关 它就帮你开 你是开他就帮你关
+                mainActivity.getSlidingMenu().toggle();
+            }
+        });
 
         Activity activity = findActivity(context);
         if (activity != null){
