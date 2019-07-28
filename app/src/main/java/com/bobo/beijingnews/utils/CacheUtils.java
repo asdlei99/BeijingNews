@@ -11,7 +11,7 @@ import com.bobo.beijingnews.activity.GuideActivity; /**
 public class CacheUtils {
 
     /**
-     * （根据key）得到本地持久化保存的值
+     * （根据key）得到本地持久化保存boolean的值
      * @param context 上下文
      * @param key 必须是string类型
      * @return
@@ -30,5 +30,27 @@ public class CacheUtils {
     public static void putBoolean(Context context, String key, boolean value) {
         SharedPreferences sp = context.getSharedPreferences("atguigu",Context.MODE_PRIVATE);
         sp.edit().putBoolean(key,value).commit();
+    }
+
+    /**
+     * 根据key持久化保存软件的String值参数
+     * @param context
+     * @param key
+     * @param value
+     */
+    public static void putString(Context context, String key, String value) {
+        SharedPreferences sp = context.getSharedPreferences("atguigu",Context.MODE_PRIVATE);
+        sp.edit().putString(key,value).commit();
+    }
+
+    /**
+     * （根据key）得到本地持久化保存的String值
+     * @param context 上下文
+     * @param key 必须是string类型
+     * @return
+     */
+    public static String getString(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences("atguigu",Context.MODE_PRIVATE);
+        return sp.getString(key,"");
     }
 }

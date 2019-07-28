@@ -2,10 +2,6 @@ package com.bobo.beijingnews.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +13,11 @@ import android.widget.TextView;
 import com.bobo.beijingnews.R;
 import com.bobo.beijingnews.activity.MainActivity;
 import com.bobo.beijingnews.base.BaseFragment;
-import com.bobo.beijingnews.domain.NewsCenterPgerBean;
+import com.bobo.beijingnews.domain.NewsCenterPagerBean;
+import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.pager.NewsCenterPager;
 import com.bobo.beijingnews.utils.DensityUtil;
 import com.bobo.beijingnews.utils.LogUtil;
-import com.bobo.beijingnews.utils.StBarUtil;
 
 import java.util.List;
 
@@ -32,7 +28,7 @@ import java.util.List;
 public class LeftmenuFragment extends BaseFragment {
 
     /**网络请求回来的本页面数据*/
-    List<NewsCenterPgerBean.DataBean> data;
+    List<NewsCenterPagerBean2.DetailPagerData> data;
 
     //显示内容的listView
     private ListView listView;
@@ -106,7 +102,7 @@ public class LeftmenuFragment extends BaseFragment {
      * 设置本页面（左侧菜单fragment）的网络数据
      * @param data
      */
-    public void setData(List<NewsCenterPgerBean.DataBean> data) {
+    public void setData(List<NewsCenterPagerBean2.DetailPagerData> data) {
         this.data = data;
 
 //        for (int i= 0;i < data.size();i++){

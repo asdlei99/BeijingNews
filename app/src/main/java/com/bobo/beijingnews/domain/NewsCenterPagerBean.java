@@ -6,7 +6,7 @@ import java.util.List;
  * Created by 求知自学网 on 2019/7/27. Copyright © Leon. All rights reserved.
  * Functions: 新闻中心数据模型
  */
-public class NewsCenterPgerBean {
+public class NewsCenterPagerBean {
 
 
     /**

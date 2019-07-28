@@ -30,4 +30,5 @@ dependencies {
     //implementation 'org.xutils:xutils:3.5.1'
     implementation project(':xutils')
     implementation files('libs/gson-2.8.5.jar')
+    implementation project(':ViewPagerIndicator_library')
 }
