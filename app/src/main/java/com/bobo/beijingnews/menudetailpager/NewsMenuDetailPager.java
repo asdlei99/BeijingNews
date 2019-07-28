@@ -1,11 +1,10 @@
 package com.bobo.beijingnews.menudetailpager;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,6 +14,7 @@ import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.menudetailpager.tabdetailpager.TabDetailPager;
 import com.bobo.beijingnews.utils.LogUtil;
+import com.viewpagerindicator.TabPageIndicator;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -27,6 +27,9 @@ import java.util.List;
  * Functions: 新闻中心下： 新闻菜单页面
  */
 public class NewsMenuDetailPager extends MenuDetailBasePager {
+
+    @ViewInject(R.id.tabPageIndicator)
+    private TabPageIndicator tabPageIndicator;
 
     @ViewInject(R.id.viewpager)
     private ViewPager viewPager;
@@ -66,10 +69,23 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
 
         //设置适配器
         viewPager.setAdapter(new MyNewsMenuDetailPagerAdapter());
+
+        //viewPager和tabPageIndicator 关联
+        tabPageIndicator.setViewPager(viewPager);
+
+        //注意：以后监听页面的变化将会用tabPageIndicator(不要再用ViewPager了)
+
     }
 
     //内部类 viewpager的适配器
     class MyNewsMenuDetailPagerAdapter extends PagerAdapter{
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            //注意写了这个方法tabPageIndicator上就有标题了
+            return children.get(position).getTitle();
+        }
 
         @Override
         public int getCount() {

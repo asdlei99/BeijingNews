@@ -31,7 +31,9 @@
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="android:textAppearance">@style/TextAppearance.TabPageIndicator</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
+        <!--Leon在这里修改文字的颜色-->
+        <item name="android:textColor">@drawable/vpi_tab_textcolor_indicator</item>
         <item name="android:maxLines">1</item>
     </style>
 

@@ -8,7 +8,8 @@
 
 2.运行案例  （没有用过的框架可以先运行起来看看）
 
-3.关联xUtils3的库
+3.关联xUtils3的库、
+    File  → New → ImportModule....  路径
 
 4.在Application中初始化xUtils3
     public class BeijingNewsApplication extends Application {

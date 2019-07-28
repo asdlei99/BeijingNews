@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.bobo.beijingnews.R;
@@ -38,10 +39,17 @@ public class MainActivity extends SlidingFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+        /**
+         *  解决NewsMenuDetailPager中 TabPageIndicator 在设置MainActivity（本页面）MainFest中设置
+         *  @style/Theme.PageIndicatorDefaults" 样式后 标题栏出现 窗口变黑的问题
+         */
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//设置没有标题
+
         super.onCreate(savedInstanceState);
 
         //1.设置主页面 侧滑菜单栏右边的页面是主页面
         setContentView(R.layout.activity_main);
+
 
         /**
          * SlidingFragmentActivity 要这样才能消掉 状态栏 消掉状态栏后左右两部分自己添加
