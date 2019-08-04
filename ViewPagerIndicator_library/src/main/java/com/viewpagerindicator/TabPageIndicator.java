@@ -21,6 +21,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -279,5 +280,19 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         public int getIndex() {
             return mIndex;
         }
+    }
+
+    /**
+     * Leon重写点击事件的分发 解决左划 和 SlidingMenu 冲突的bug
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        //要求父层视图不拦截触摸事件  true禁用拦截 false反之
+        getParent().requestDisallowInterceptTouchEvent(true);
+
+        return super.dispatchTouchEvent(ev);
     }
 }

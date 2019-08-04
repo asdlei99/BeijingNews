@@ -15,7 +15,8 @@
 -->
 
 <resources>
-    <style name="Theme.PageIndicatorDefaults" parent="android:Theme">
+    <!--parent="android:Theme" 改为： parent="Base.Theme.AppCompat.Light.DarkActionBar"-->
+    <style name="Theme.PageIndicatorDefaults" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>

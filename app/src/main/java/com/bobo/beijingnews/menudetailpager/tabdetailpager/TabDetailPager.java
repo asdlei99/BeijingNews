@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
+import com.bobo.beijingnews.utils.Constants;
+import com.bobo.beijingnews.utils.LogUtil;
 
 /**
  * Created by 求知自学网 on 2019/7/28. Copyright © Leon. All rights reserved.
@@ -16,6 +18,9 @@ import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 public class TabDetailPager extends MenuDetailBasePager{
 
     private TextView textView;
+
+    //页签详情页面 请求数据的url
+    private String url;
 
     //页面的数据
     private NewsCenterPagerBean2.DetailPagerData.ChildrenData childrenData;
@@ -39,5 +44,7 @@ public class TabDetailPager extends MenuDetailBasePager{
     public void initData() {
         super.initData();
         textView.setText(childrenData.getTitle());
+        url = Constants.BASE_URL + childrenData.getUrl();
+        LogUtil.e(childrenData.getTitle() +" : "+url);
     }
 }
