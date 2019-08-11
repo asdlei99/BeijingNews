@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--android:cacheColorHint="@android:color/transparent" 低版本点击变灰去掉
+     android:divider="@null" 去掉系统自带的分割线-->
+    <ListView
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

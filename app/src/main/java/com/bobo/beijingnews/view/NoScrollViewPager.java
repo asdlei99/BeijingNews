@@ -39,4 +39,14 @@ public class NoScrollViewPager extends ViewPager{
     public boolean onTouchEvent(MotionEvent ev) {
         return true;
     }
+
+    /**
+     * 解决 viewpager 使用了tabPageIndicator  左划到头还能左划的bug
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return false;
+    }
 }
