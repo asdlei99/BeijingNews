@@ -1,5 +1,5 @@
 # BeijingNews
-波波京闻（仿北京新闻）
+波波北京（仿北京新闻）
 
 感谢以下开源 组织 机构 个人：尚硅谷 jfeinstein10/SlidingMenu wyouflf/xUtils3 Gson(谷歌)  JakeWharton/ViewPagerIndicator
 

@@ -31,7 +31,7 @@ public class NoScrollViewPager extends ViewPager{
     }
 
     /**
-     * 重新触摸事件，消耗掉触摸事件
+     * 重写触摸事件，消耗掉触摸事件
      * @param ev
      * @return
      */
@@ -42,6 +42,8 @@ public class NoScrollViewPager extends ViewPager{
 
     /**
      * 解决 viewpager 使用了tabPageIndicator  左划到头还能左划的bug
+     * 是因为嵌套使用viewpager导致的（左划到头还能左划的bug）在上层viewpager 本类 中 拦截方法 return false解决
+     * Intercept 拦截的意识
      * @param ev
      * @return
      */

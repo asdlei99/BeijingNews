@@ -22,6 +22,7 @@ import com.bobo.beijingnews.domain.TabDetailPagerBean;
 import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
 import com.bobo.beijingnews.utils.LogUtil;
+import com.bobo.beijingnews.view.HorizontalScrollViewPager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
@@ -41,7 +42,7 @@ import java.util.List;
 public class TabDetailPager extends MenuDetailBasePager{
 
     //用ViewPager 制作轮播图
-    private ViewPager viewpager;
+    private HorizontalScrollViewPager viewpager;
 
     //轮播图上的标题
     private TextView tv_title;
@@ -102,7 +103,7 @@ public class TabDetailPager extends MenuDetailBasePager{
         //打气筒加载 顶部轮播图的xml布局文件
         View topNewsView = View.inflate(context,R.layout.topnews,null);
         //用ViewPager 制作轮播图
-        viewpager = (ViewPager)topNewsView.findViewById(R.id.viewpager);
+        viewpager = (HorizontalScrollViewPager)topNewsView.findViewById(R.id.viewpager);
         //轮播图上的标题
         tv_title = (TextView)topNewsView.findViewById(R.id.tv_title);
         //轮播图上的指示器小点
@@ -354,6 +355,7 @@ public class TabDetailPager extends MenuDetailBasePager{
             String imageUrl = Constants.BASE_URL + topnewsData.getTopimage();
 
             //联网请求图片 xUtil 有和 Glide 类似的功能
+            //x.image().bind(imageView,imageUrl,imageOptions);
             x.image().bind(imageView,imageUrl);
 
             return imageView;
