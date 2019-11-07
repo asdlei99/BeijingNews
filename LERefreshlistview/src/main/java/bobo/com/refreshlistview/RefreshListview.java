@@ -1,4 +1,4 @@
-package com.bobo.beijingnews.view;
+package bobo.com.refreshlistview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import  com.bobo.beijingnews.R;
+import bobo.com.refreshlistview.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -72,7 +72,7 @@ import java.util.Date;
  */
 public class RefreshListview extends ListView{
 
-    //自定义下拉刷新和顶部轮播图（先不加入）
+    //自定义下拉刷新和顶部轮播图（先不加入后来加入）
     private LinearLayout headerView;
 
     //下拉刷新控件
@@ -133,6 +133,14 @@ public class RefreshListview extends ListView{
     //是否已经上拉加载更多
     private boolean isLoadMore = false;
 
+    /**
+     * 顶部轮播图部分
+     */
+    private View topNewsView;
+
+    //listview在Y轴上的坐标默认为-1
+    private int listViewOnScreenY = -1;
+
     //自定义控件一般要实现三个构造方法一
     public RefreshListview(Context context) {
         this(context,null);
@@ -165,6 +173,17 @@ public class RefreshListview extends ListView{
 
         //监听ListView的滚动
         setOnScrollListener(new MyOnScrollListener());
+    }
+
+    /**
+     * （自定义）添加顶部轮播图
+     * @param topNewsView
+     */
+    public void addTopNewsView(View topNewsView) {
+        if (topNewsView != null){
+            this.topNewsView = topNewsView;
+            headerView.addView(topNewsView);
+        }
     }
 
     //采用内部类的方式实现 list view 滚动接口的监听
@@ -248,6 +267,14 @@ public class RefreshListview extends ListView{
                     startY = ev.getY();
                 }
 
+                //判断顶部轮播图是否完全显示,只有完全显示才会有下拉刷新，解决上拉加载更多后下拉刷新回到顶部的bug
+                boolean isDisplayTopNews = isDisplayTopNews();
+
+                if (!isDisplayTopNews){
+                   //加载更多-break
+                   break;
+                }
+
                 //如果是正在刷新，就不让再刷新了
                 if (currentStatus == REFRESHING){
                     break;
@@ -302,6 +329,37 @@ public class RefreshListview extends ListView{
         }
 
         return super.onTouchEvent(ev);
+    }
+
+    /**
+     * 判断是否完全显示顶部轮播图
+     * 当listView在屏幕上的Y轴坐标小于或等于顶部轮播图在Y轴上坐标的时候，顶部轮播图完全显示。
+     * @return
+     */
+    private boolean isDisplayTopNews() {
+
+        if (topNewsView != null){
+            //1.得到ListView 在屏幕上的坐标
+            int[] location = new int[2];
+            if (listViewOnScreenY == -1) {
+                getLocationOnScreen(location);
+                listViewOnScreenY = location[1];
+            }
+
+            //2.得到顶部轮播图在屏幕上的坐标
+            topNewsView.getLocationOnScreen(location);
+            int topNewsViewOnScreenY = location[1];
+
+            //当listView在屏幕上的Y轴坐标小于或等于顶部轮播图在Y轴上坐标的时候，顶部轮播图完全显示。
+            //if (listViewOnScreenY <= topNewsViewOnScreenY){
+            // return true;
+            //}else{
+            //return false;
+            //}
+            return listViewOnScreenY <= topNewsViewOnScreenY;
+        }else{
+            return true;
+        }
     }
 
     private void refreshViewState(){

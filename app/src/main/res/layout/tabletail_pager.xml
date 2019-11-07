@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <!--android:cacheColorHint="@android:color/transparent" 低版本点击变灰去掉
-     android:divider="@null" 去掉系统自带的分割线-->
-    <com.bobo.beijingnews.view.RefreshListview
+     android:divider="@null" 去掉系统自带的分割线  bobo.com.refreshlistview.RefreshListview -->
+    <bobo.com.refreshlistview.RefreshListview
         android:cacheColorHint="@android:color/transparent"
         android:divider="@null"
         android:id="@+id/listview"

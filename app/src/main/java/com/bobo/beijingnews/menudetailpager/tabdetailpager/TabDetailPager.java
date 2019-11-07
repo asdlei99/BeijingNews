@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +23,6 @@ import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
 import com.bobo.beijingnews.utils.LogUtil;
 import com.bobo.beijingnews.view.HorizontalScrollViewPager;
-import com.bobo.beijingnews.view.RefreshListview;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
@@ -36,6 +34,8 @@ import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import java.util.List;
+
+import bobo.com.refreshlistview.RefreshListview;
 
 /**
  * Created by 求知自学网 on 2019/7/28. Copyright © Leon. All rights reserved.
@@ -122,7 +122,8 @@ public class TabDetailPager extends MenuDetailBasePager{
         ll_point_group = (LinearLayout)topNewsView.findViewById(R.id.ll_point_group);
 
         //把顶部轮播图部分视图以“头”的方式添加到list view中
-        listview.addHeaderView(topNewsView);
+        //listview.addHeaderView(topNewsView);
+        listview.addTopNewsView(topNewsView);
 
         //设置监听下拉刷新
         listview.setOnRefreshListener(new MyOnRefreshListene());
