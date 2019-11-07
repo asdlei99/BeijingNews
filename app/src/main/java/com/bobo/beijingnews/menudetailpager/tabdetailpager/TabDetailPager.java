@@ -125,7 +125,7 @@ public class TabDetailPager extends MenuDetailBasePager{
         //listview.addHeaderView(topNewsView);
         listview.addTopNewsView(topNewsView);
 
-        //设置监听下拉刷新
+        //设置监听下拉刷新上拉加载更多
         listview.setOnRefreshListener(new MyOnRefreshListene());
 
         return view;
