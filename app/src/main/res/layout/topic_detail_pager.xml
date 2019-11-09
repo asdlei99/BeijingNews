@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--android:cacheColorHint="@android:color/transparent" 低版本点击变灰去掉
+     android:divider="@null" 去掉系统自带的分割线  bobo.com.refreshlistview.RefreshListview -->
+    <!--<bobo.com.refreshlistview.RefreshListview-->
+        <!--android:cacheColorHint="@android:color/transparent"-->
+        <!--android:divider="@null"-->
+        <!--android:id="@+id/listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+    <!--android:dividerHeight="4dp"-->
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pull_refresh_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true"
+        ptr:ptrMode="both"/>
+
+</LinearLayout>

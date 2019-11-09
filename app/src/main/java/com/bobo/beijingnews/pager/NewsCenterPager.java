@@ -139,7 +139,7 @@ public class NewsCenterPager extends BasePager {
         //添加详情页面 必须要在leftmenuFragment.setData(data) 前面
         detailBasePagers = new ArrayList<>();
         detailBasePagers.add(new NewsMenuDetailPager(context,data.get(0)));//新闻中心下： 新闻详情页面
-        detailBasePagers.add(new TopicMenuDetailPager(context));//新闻中心下： 专题详情页面
+        detailBasePagers.add(new TopicMenuDetailPager(context,data.get(0)));//新闻中心下： 专题详情页面
         detailBasePagers.add(new PhotosMenuDetailPager(context));//新闻中心下： 图组详情页面
         detailBasePagers.add(new InteracMenuDetailPager(context));//新闻中心下： 互动详情页面
         detailBasePagers.add(new VoteMenuDetailPager(context));//新闻中心下： 投票详情页面

@@ -1,8 +1,6 @@
 package com.bobo.beijingnews.menudetailpager.tabdetailpager;
 
 import android.content.Context;
-import com.bobo.beijingnews.R;
-
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bobo.beijingnews.R;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.domain.TabDetailPagerBean;
@@ -26,6 +26,8 @@ import com.bobo.beijingnews.view.HorizontalScrollViewPager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.xutils.common.Callback;
 import org.xutils.common.util.DensityUtil;
@@ -39,9 +41,9 @@ import bobo.com.refreshlistview.RefreshListview;
 
 /**
  * Created by 求知自学网 on 2019/7/28. Copyright © Leon. All rights reserved.
- * Functions: 新闻下的 页签详情页面
+ * Functions: 专题下的 页签详情页面
  */
-public class TabDetailPager extends MenuDetailBasePager{
+public class TopicDetailPager extends MenuDetailBasePager{
 
     //用ViewPager 制作轮播图
     private HorizontalScrollViewPager viewpager;
@@ -53,7 +55,7 @@ public class TabDetailPager extends MenuDetailBasePager{
     private LinearLayout ll_point_group;
 
     //展示内容的listview
-    private RefreshListview listview;
+    private ListView listview;
 
     //listview的适配器
     private TabDetailPagerListAdapter adapter;
@@ -86,7 +88,10 @@ public class TabDetailPager extends MenuDetailBasePager{
      */
     private boolean isLoadMore = false;
 
-    public TabDetailPager(Context context, NewsCenterPagerBean2.DetailPagerData.ChildrenData childrenData) {
+    // PullToRefreshListView下拉刷新上拉加载更多的ListView
+    private PullToRefreshListView mPullToRefreshListView;
+
+    public TopicDetailPager(Context context, NewsCenterPagerBean2.DetailPagerData.ChildrenData childrenData) {
         super(context);
         this.childrenData = childrenData;
 
@@ -108,9 +113,12 @@ public class TabDetailPager extends MenuDetailBasePager{
 
     @Override
     public View initView() {
-        View view = View.inflate(context,R.layout.tabletail_pager,null);
+        View view = View.inflate(context,R.layout.topic_detail_pager,null);
+
         //展示内容的listview
-        listview = (RefreshListview) view.findViewById(R.id.listview);
+        mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.pull_refresh_list);
+
+        listview = mPullToRefreshListView.getRefreshableView();
 
         //打气筒加载 顶部轮播图的xml布局文件
         View topNewsView = View.inflate(context,R.layout.topnews,null);
@@ -122,38 +130,60 @@ public class TabDetailPager extends MenuDetailBasePager{
         ll_point_group = (LinearLayout)topNewsView.findViewById(R.id.ll_point_group);
 
         //把顶部轮播图部分视图以“头”的方式添加到list view中
-        //listview.addHeaderView(topNewsView);
-        listview.addTopNewsView(topNewsView);
+        //listview.addTopNewsView(topNewsView);
+        listview.addHeaderView(topNewsView);
+
 
         //设置监听下拉刷新上拉加载更多
-        listview.setOnRefreshListener(new MyOnRefreshListene());
+        //listview.setOnRefreshListener(new MyOnRefreshListene());
+        mPullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                //下拉刷新
+                getDataFromNet();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                //上拉加载更多
+                if (TextUtils.isEmpty(moreUrl)){
+                    //没有更多数据
+                    Toast.makeText(context,"没有更多数据",Toast.LENGTH_SHORT).show();
+                    //隐藏上拉加载更多控件
+                    //listview.onRefreshFinish(false);
+                    mPullToRefreshListView.onRefreshComplete();
+                }else{
+                    getMoreDataFromNet();
+                }
+            }
+        });
 
         return view;
     }
 
-    //采用内部类的方式实现下拉刷新接口的监听
-    class MyOnRefreshListene implements RefreshListview.OnRefreshListener{
-
-        @Override
-        public void onPullDownRefresh() {
-            //联网请求数据
-            //Toast.makeText(context,"下拉刷新被回调了",Toast.LENGTH_SHORT).show();
-            getDataFromNet();
-        }
-
-        @Override
-        public void onLoadMore() {
-
-            if (TextUtils.isEmpty(moreUrl)){
-                //没有更多数据
-                Toast.makeText(context,"没有更多数据",Toast.LENGTH_SHORT).show();
-                //隐藏上拉加载更多控件
-                listview.onRefreshFinish(false);
-            }else{
-                getMoreDataFromNet();
-            }
-        }
-    }
+//    //采用内部类的方式实现下拉刷新接口的监听
+//    class MyOnRefreshListene implements RefreshListview.OnRefreshListener{
+//
+//        @Override
+//        public void onPullDownRefresh() {
+//            //联网请求数据
+//            //Toast.makeText(context,"下拉刷新被回调了",Toast.LENGTH_SHORT).show();
+//            getDataFromNet();
+//        }
+//
+//        @Override
+//        public void onLoadMore() {
+//
+//            if (TextUtils.isEmpty(moreUrl)){
+//                //没有更多数据
+//                Toast.makeText(context,"没有更多数据",Toast.LENGTH_SHORT).show();
+//                //隐藏上拉加载更多控件
+//                listview.onRefreshFinish(false);
+//            }else{
+//                getMoreDataFromNet();
+//            }
+//        }
+//    }
 
     /**
      * 获取网络数据
@@ -172,7 +202,8 @@ public class TabDetailPager extends MenuDetailBasePager{
                 //解析数据
                 Log.e("加载更多请求成功==",result);
 
-                listview.onRefreshFinish(false);
+                //listview.onRefreshFinish(false);
+                mPullToRefreshListView.onRefreshComplete();
 
                 //一定要把这个放在前面
                 isLoadMore = true;
@@ -184,7 +215,8 @@ public class TabDetailPager extends MenuDetailBasePager{
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 Log.e("加载更多联网失败onError==",ex.getMessage());
-                listview.onRefreshFinish(false);
+                //listview.onRefreshFinish(false);
+                mPullToRefreshListView.onRefreshComplete();
             }
 
             @Override
@@ -243,7 +275,8 @@ public class TabDetailPager extends MenuDetailBasePager{
                 processData(result);
 
                 //隐藏下拉刷新控件-（重新显示数据），更新时间
-                listview.onRefreshFinish(true);
+                //listview.onRefreshFinish(true);
+                mPullToRefreshListView.onRefreshComplete();
             }
 
             @Override
@@ -251,7 +284,8 @@ public class TabDetailPager extends MenuDetailBasePager{
                 Log.e("leon",childrenData.getTitle()+"-页面数据请求失败=="+ex.getMessage());
                 //LogUtil.e(childrenData.getTitle()+"-页面数据请求失败=="+ex.getMessage());
                 //隐藏下拉刷新控件-不更新时间，只是隐藏
-                listview.onRefreshFinish(false);
+                //listview.onRefreshFinish(false);
+                mPullToRefreshListView.onRefreshComplete();
             }
 
             @Override

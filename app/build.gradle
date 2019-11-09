@@ -32,4 +32,5 @@ dependencies {
     implementation files('libs/gson-2.8.5.jar')
     implementation project(':ViewPagerIndicator_library')
     implementation project(':LERefreshlistview')
+    implementation project(':PullToRefresh_library')
 }
