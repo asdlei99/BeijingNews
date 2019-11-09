@@ -3,6 +3,7 @@ package com.bobo.beijingnews.menudetailpager.tabdetailpager;
 import android.content.Context;
 import com.bobo.beijingnews.R;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,9 +41,12 @@ import bobo.com.refreshlistview.RefreshListview;
 
 /**
  * Created by 求知自学网 on 2019/7/28. Copyright © Leon. All rights reserved.
- * Functions: 新闻下的 页签详情页面
+ * Functions: 新闻 下的页签详情页面
  */
 public class TabDetailPager extends MenuDetailBasePager{
+
+    //本地持久化保存 用户点击过（阅读过）的新闻变灰 id集合 的key
+    public static final String READ_ARRAY_ID = "read_array_id";
 
     //用ViewPager 制作轮播图
     private HorizontalScrollViewPager viewpager;
@@ -128,7 +133,36 @@ public class TabDetailPager extends MenuDetailBasePager{
         //设置监听下拉刷新上拉加载更多
         listview.setOnRefreshListener(new MyOnRefreshListene());
 
+        //设置listview item的点击事件的监听
+        listview.setOnItemClickListener(new MyOnItemClickListener());
+
         return view;
+    }
+
+    //采用内部类实现listview item的点击事件监听
+    class MyOnItemClickListener implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            //这里要-1 是因为 0 其实是banner图
+            int realPosition = position - 1;
+
+            TabDetailPagerBean.DataBean.NewsData newsData = news.get(realPosition);
+            //Toast.makeText(context,"newsData==id=="+newsData.getId()+","+
+            // newsData.getTitle(),Toast.LENGTH_SHORT).show();
+
+            //用户点击过（阅读过）的新闻变灰 1.取出保存的id集合
+            String idArray = CacheUtils.getString(context,READ_ARRAY_ID);
+
+            //2.判断是否存在，如果不存在，才保存，并且刷新适配器
+            if (!idArray.contains(newsData.getId()+"")){//3511,3512,3513
+                CacheUtils.putString(context,READ_ARRAY_ID,idArray+newsData.getId()+",");
+
+                //刷新适配器
+                adapter.notifyDataSetChanged();//刷新适配器会执行getCount() getView()
+            }
+        }
     }
 
     //采用内部类的方式实现下拉刷新接口的监听
@@ -364,6 +398,16 @@ public class TabDetailPager extends MenuDetailBasePager{
 
             //设置 时间
             viewHolder.tv_time.setText(newsData.getPubdate());
+
+            //用户点击过（阅读过）的变成灰色
+            String idArray = CacheUtils.getString(context,READ_ARRAY_ID);
+            if (idArray.contains(newsData.getId()+"")){
+                //设置灰色
+                viewHolder.tv_title.setTextColor(Color.GRAY);
+            }else{
+                //设置黑色
+                viewHolder.tv_title.setTextColor(Color.BLACK);
+            }
 
             return convertView;
         }

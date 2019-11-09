@@ -39,3 +39,9 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         textView.setText("图组详情页面的内容");
     }
 }
+
+
+// textView = new TextView(context);
+// textView.setGravity(Gravity.CENTER);
+// textView.setTextColor(Color.RED);
+// textView.setTextSize(25);

@@ -28,6 +28,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.extras.SoundPullEventListener;
 
 import org.xutils.common.Callback;
 import org.xutils.common.util.DensityUtil;
@@ -119,6 +120,16 @@ public class TopicDetailPager extends MenuDetailBasePager{
         mPullToRefreshListView = (PullToRefreshListView)view.findViewById(R.id.pull_refresh_list);
 
         listview = mPullToRefreshListView.getRefreshableView();
+
+        /**
+         * Add Sound Event Listener (添加声音事件侦听器)
+         */
+        SoundPullEventListener<ListView> soundListener  = new SoundPullEventListener<>(context);
+        soundListener.addSoundEvent(PullToRefreshBase.State.PULL_TO_REFRESH,R.raw.pull_event);
+        soundListener.addSoundEvent(PullToRefreshBase.State.RESET,R.raw.reset_sound);
+        soundListener.addSoundEvent(PullToRefreshBase.State.REFRESHING,R.raw.refreshing_sound);
+        mPullToRefreshListView.setOnPullEventListener(soundListener);
+
 
         //打气筒加载 顶部轮播图的xml布局文件
         View topNewsView = View.inflate(context,R.layout.topnews,null);
