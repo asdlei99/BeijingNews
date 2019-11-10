@@ -3,6 +3,7 @@ package com.bobo.beijingnews.menudetailpager.tabdetailpager;
 import android.content.Context;
 import com.bobo.beijingnews.R;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
@@ -18,11 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bobo.beijingnews.activity.NewsDetailActivity;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.domain.TabDetailPagerBean;
 import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
+import com.bobo.beijingnews.utils.IsNotFastClickUtils;
 import com.bobo.beijingnews.utils.LogUtil;
 import com.bobo.beijingnews.view.HorizontalScrollViewPager;
 import com.bumptech.glide.Glide;
@@ -145,12 +148,17 @@ public class TabDetailPager extends MenuDetailBasePager{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            //避免重复点击开启重复的页面
+            if (!IsNotFastClickUtils.isFastClick()){return;};
+
             //这里要-1 是因为 0 其实是banner图
             int realPosition = position - 1;
 
             TabDetailPagerBean.DataBean.NewsData newsData = news.get(realPosition);
             //Toast.makeText(context,"newsData==id=="+newsData.getId()+","+
             // newsData.getTitle(),Toast.LENGTH_SHORT).show();
+            Log.e("newsData==id==",newsData.getId()+","+newsData.getTitle()+",url==="
+                    +newsData.getUrl());
 
             //用户点击过（阅读过）的新闻变灰 1.取出保存的id集合
             String idArray = CacheUtils.getString(context,READ_ARRAY_ID);
@@ -162,6 +170,11 @@ public class TabDetailPager extends MenuDetailBasePager{
                 //刷新适配器
                 adapter.notifyDataSetChanged();//刷新适配器会执行getCount() getView()
             }
+
+            //新闻浏览（详情）页面
+            Intent intent = new Intent(context,NewsDetailActivity.class);
+            intent.putExtra("url",Constants.BASE_URL+newsData.getUrl());
+            context.startActivity(intent);
         }
     }
 

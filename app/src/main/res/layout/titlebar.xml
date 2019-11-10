@@ -25,4 +25,48 @@
         android:layout_centerVertical="true"
         android:visibility="gone"/>
 
+    <!--注意 ImageButton 有背景 不想要可以设置为透明
+    android:layout_marginLeft="8dp"-->
+    <ImageButton
+        android:background="@android:color/transparent"
+        android:src="@drawable/back"
+        android:id="@+id/ib_back"
+        android:layout_marginLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--注意 ImageButton 有背景 不想要可以设置为透明-->
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_textsize"
+            android:id="@+id/ib_textsize"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+        <!--注意 ImageButton 有背景 不想要可以设置为透明-->
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_share"
+            android:id="@+id/ib_share"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

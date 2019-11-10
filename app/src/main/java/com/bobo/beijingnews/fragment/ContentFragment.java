@@ -59,8 +59,8 @@ public class ContentFragment extends BaseFragment {
         viewpager = (NoScrollViewPager)view.findViewById(R.id.viewpager);
         rg_main = (RadioGroup)view.findViewById(R.id.rg_main);
 
-        //设置沉浸式状态栏 先在mainActivity中让状态栏小时
-        // 再把（5个子页面）通用导航栏 背景图改高
+        //设置沉浸式状态栏 先在mainActivity中让状态栏消失
+        // 再把（5个子页面）通用导航栏 背景图改高  已经在父类中实现了
         //StBarUtil.setOccupationHeight(context,view);
 
         //1.把视图注入到框架中，让ContentFragment.this 和 view关联起来

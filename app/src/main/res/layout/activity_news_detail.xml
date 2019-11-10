@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.NewsDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/title_red_bg"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--沉浸式导航栏顶替状态栏的view-->
+        <View
+            android:id="@+id/occupation"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <!--导航栏（标题栏）-->
+        <include layout="@layout/titlebar"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!--indeterminate:不定的，不明确的
+        android:layout_gravity="center" 相对布局中不会起作用的-->
+        <ProgressBar
+            android:id="@+id/pb_loadig"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/custom_progressbar"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
