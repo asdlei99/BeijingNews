@@ -13,6 +13,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 /**
  * 作者：尚硅谷-杨光福 on 2016/7/28 11:19
@@ -22,9 +23,13 @@ import android.webkit.WebViewClient;
  */
 public class JsCallJavaCallPhoneActivity extends Activity {
 
+    public static final int REQUEST_CALL_PERMISSION = 10111; //拨号请求码
 
     private WebView webview;
     private WebSettings webSettings;
+
+    /** 要拨打的电话号码 */
+    private String mPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,7 @@ public class JsCallJavaCallPhoneActivity extends Activity {
         webview.loadUrl("file:///android_asset/JsCallJavaCallPhone.html");
 //        webview.loadUrl("http://192.168.21.165:8080/JsCallJavaCallPhone.html");
 
-        //(当加载页面完成的时候回调)不让从当前网页跳转到系统的浏览器中（顺便解决重定向）
+        // (当加载页面完成的时候回调)不让从当前网页跳转到系统的浏览器中（顺便解决重定向）
         webview.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -61,21 +66,21 @@ public class JsCallJavaCallPhoneActivity extends Activity {
                 webview.loadUrl("javascript:show('" + json + "')");
             }
         });
-
     }
 
-
+    /**
+     * 内部类实现Java调用JavaScript
+     * 内部类的方法中加上 @JavascriptInterface 注解可以适配新老版本的安卓手机
+     */
     class MyJavascriptInterface {
-        //拨打电话
+        // 拨打电话
         @JavascriptInterface
         public void call(String phone) {
 
-            // TODO:拨号前 先获取打电话的权限
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-            if (ActivityCompat.checkSelfPermission(JsCallJavaCallPhoneActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            startActivity(intent);
+            mPhoneNumber = phone;
+
+            // 调用拨打电话的方法
+            callPhone();
             //Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
             //if (ActivityCompat.checkSelfPermission(JsCallJavaCallPhoneActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -90,7 +95,7 @@ public class JsCallJavaCallPhoneActivity extends Activity {
             //startActivity(intent);
          }
 
-        //加载联系人
+        // 加载联系人
         @JavascriptInterface
         @UiThread
          public void showcontacts(){
@@ -108,4 +113,38 @@ public class JsCallJavaCallPhoneActivity extends Activity {
          }
     }
 
+    /**
+     * 播放电话的方法
+     */
+    private void callPhone() {
+        // 注意：拨号前先获取打电话的权限
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mPhoneNumber));
+        if (ActivityCompat.checkSelfPermission(JsCallJavaCallPhoneActivity.this, Manifest.
+                permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.
+                    permission.CALL_PHONE}, REQUEST_CALL_PERMISSION);
+            return;
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 检查权限后的回调
+     * @param requestCode 请求码
+     * @param permissions  权限
+     * @param grantResults 结果
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CALL_PERMISSION: //拨打电话
+                if (permissions.length != 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {//失败
+                    Toast.makeText(this,"请允许拨号权限后再试",Toast.LENGTH_SHORT).show();
+                } else {
+                    // 成功调用拨打电话的方法
+                    callPhone();
+                }
+                break;
+        }
+    }
 }

@@ -53,12 +53,17 @@ public class JsCallJavaVideoActivity extends Activity {
 
     }
 
-
+    /**
+     * 内部类实现Java调用JavaScript
+     * 内部类的方法中加上 @JavascriptInterface 注解可以适配新老版本的安卓手机
+     */
     private class MyJavascriptInterface {
 
         @JavascriptInterface
         public void playVideo(int id,String videoUrl,String title){
-            Intent intent = new Intent();//隐式意图
+            // 隐式意图
+            Intent intent = new Intent();
+            // 打开系统播放器
             intent.setDataAndType(Uri.parse(videoUrl),"video/*");
             startActivity(intent);
         }

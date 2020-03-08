@@ -92,13 +92,13 @@ public class JavaAndJSActivity extends Activity implements View.OnClickListener 
         webSettings = webView.getSettings();
         //设置支持javaScript
         webSettings.setJavaScriptEnabled(true);
-        //设置双击变大变小
-        webSettings.setUseWideViewPort(true);
-        //增加缩放按钮
-        webSettings.setBuiltInZoomControls(true);
-        //设置文字大小
+        // 设置双击变大变小
+        // webSettings.setUseWideViewPort(true);
+        // 增加缩放按钮
+        // webSettings.setBuiltInZoomControls(true);
+        // 设置文字大小
         webSettings.setTextZoom(100);
-        //不让从当前网页跳转到系统的浏览器中
+        // 不让从当前网页跳转到系统的浏览器中
         webView.setWebViewClient(new WebViewClient() {
             //当加载页面完成的时候回调
             @Override
@@ -107,7 +107,7 @@ public class JavaAndJSActivity extends Activity implements View.OnClickListener 
             }
         });
 
-        //添加javaScript接口
+        // 添加javaScript接口
         webView.addJavascriptInterface(new MyJavascriptInterface(),"android");
 
         //可以加载网络的页面，也可以加载应用内置的页面
@@ -118,11 +118,17 @@ public class JavaAndJSActivity extends Activity implements View.OnClickListener 
     }
 
 
+    /**
+     * 内部类实现Java调用JavaScript
+     * 内部类的方法中加上 @JavascriptInterface 注解可以适配新老版本的安卓手机
+     */
     private class MyJavascriptInterface {
+
         @JavascriptInterface
         public void showToast(){
             Toast.makeText(JavaAndJSActivity.this, "我被js调用了", Toast.LENGTH_SHORT).show();
         }
+
         @JavascriptInterface
         public void showToast2(){
             Toast.makeText(JavaAndJSActivity.this, "我被js调用了222", Toast.LENGTH_SHORT).show();
