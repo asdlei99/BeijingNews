@@ -5,11 +5,14 @@ import com.bobo.beijingnews.R;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -78,10 +81,14 @@ public class TabDetailPager extends MenuDetailBasePager{
     //顶部benner的数据集合
     private List<TabDetailPagerBean.DataBean.TopnewsData> topnews;
 
-    //banner上之前 高亮（红色）显示的位置 默认为0
+    /**
+     * banner上之前 高亮（红色）显示的位置 默认为0
+     */
     private int prePosition;
 
-    //list view 新闻列表对应的集合数据
+    /**
+     * list view 新闻列表对应的集合数据
+     */
     List<TabDetailPagerBean.DataBean.NewsData> news;
 
     /**
@@ -94,22 +101,32 @@ public class TabDetailPager extends MenuDetailBasePager{
      */
     private boolean isLoadMore = false;
 
+    /**
+     * 自定义handler
+     */
+    private InternalHandler internalHandler;
+
+    /**
+     * ViewPager(轮播图)是否正在被拖拽 默认为false即没有
+     */
+    private boolean isDragging = false;
+
     public TabDetailPager(Context context, NewsCenterPagerBean2.DetailPagerData.ChildrenData childrenData) {
         super(context);
         this.childrenData = childrenData;
 
         imageOptions = new ImageOptions.Builder()
                 .setSize(DensityUtil.dip2px(100), DensityUtil.dip2px(100))
-                //设置圆角
+                // 设置圆角
                 .setRadius(DensityUtil.dip2px(5))
                 // 如果ImageView的大小不是定义为wrap_content, 不要crop.
                 .setCrop(true) // 很多时候设置了合适的scaleType也不需要它.
                 // 加载中或错误图片的ScaleType
                 //.setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                //加载时的图片（占位图片）
+                // 加载时的图片（占位图片）
                 .setLoadingDrawableId(R.drawable.news_pic_default)
-                //错误时显示的图片
+                // 错误时显示的图片
                 .setFailureDrawableId(R.drawable.news_pic_default)
                 .build();
     }
@@ -117,32 +134,32 @@ public class TabDetailPager extends MenuDetailBasePager{
     @Override
     public View initView() {
         View view = View.inflate(context,R.layout.tabletail_pager,null);
-        //展示内容的listview
+        // 展示内容的listview
         listview = (RefreshListview) view.findViewById(R.id.listview);
 
-        //打气筒加载 顶部轮播图的xml布局文件
+        // 打气筒加载 顶部轮播图的xml布局文件
         View topNewsView = View.inflate(context,R.layout.topnews,null);
-        //用ViewPager 制作轮播图
+        // 用ViewPager 制作轮播图
         viewpager = (HorizontalScrollViewPager)topNewsView.findViewById(R.id.viewpager);
-        //轮播图上的标题
+        // 轮播图上的标题
         tv_title = (TextView)topNewsView.findViewById(R.id.tv_title);
         //轮播图上的指示器小点
         ll_point_group = (LinearLayout)topNewsView.findViewById(R.id.ll_point_group);
 
-        //把顶部轮播图部分视图以“头”的方式添加到list view中
-        //listview.addHeaderView(topNewsView);
+        // 把顶部轮播图部分视图以“头”的方式添加到list view中
+        // listview.addHeaderView(topNewsView);
         listview.addTopNewsView(topNewsView);
 
-        //设置监听下拉刷新上拉加载更多
+        // 设置监听下拉刷新上拉加载更多
         listview.setOnRefreshListener(new MyOnRefreshListene());
 
-        //设置listview item的点击事件的监听
+        // 设置listview item的点击事件的监听
         listview.setOnItemClickListener(new MyOnItemClickListener());
 
         return view;
     }
 
-    //采用内部类实现listview item的点击事件监听
+    // 采用内部类实现listview item的点击事件监听
     class MyOnItemClickListener implements AdapterView.OnItemClickListener{
 
         @Override
@@ -167,18 +184,18 @@ public class TabDetailPager extends MenuDetailBasePager{
             if (!idArray.contains(newsData.getId()+"")){//3511,3512,3513
                 CacheUtils.putString(context,READ_ARRAY_ID,idArray+newsData.getId()+",");
 
-                //刷新适配器
+                // 刷新适配器
                 adapter.notifyDataSetChanged();//刷新适配器会执行getCount() getView()
             }
 
-            //新闻浏览（详情）页面
+            // 跳转到新闻浏览（详情）页面
             Intent intent = new Intent(context,NewsDetailActivity.class);
             intent.putExtra("url",Constants.BASE_URL+newsData.getUrl());
             context.startActivity(intent);
         }
     }
 
-    //采用内部类的方式实现下拉刷新接口的监听
+    // 采用内部类的方式实现下拉刷新接口的监听
     class MyOnRefreshListene implements RefreshListview.OnRefreshListener{
 
         @Override
@@ -194,7 +211,7 @@ public class TabDetailPager extends MenuDetailBasePager{
             if (TextUtils.isEmpty(moreUrl)){
                 //没有更多数据
                 Toast.makeText(context,"没有更多数据",Toast.LENGTH_SHORT).show();
-                //隐藏上拉加载更多控件
+                // 隐藏上拉加载更多控件
                 listview.onRefreshFinish(false);
             }else{
                 getMoreDataFromNet();
@@ -316,6 +333,10 @@ public class TabDetailPager extends MenuDetailBasePager{
 
     }
 
+    /**
+     * 解析服务器返回的数据
+     * @param json
+     */
     private void processData(String json) {
         TabDetailPagerBean bean = parsedJson(json);
 
@@ -343,7 +364,7 @@ public class TabDetailPager extends MenuDetailBasePager{
             viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
             tv_title.setText(topnews.get(prePosition).getTitle());//默认显示第0个标题
 
-            //准备list view 对应的集合数据
+            // 准备list view 对应的集合数据
             news = bean.getData().getNews();
 
             //设置listView的适配器
@@ -358,9 +379,55 @@ public class TabDetailPager extends MenuDetailBasePager{
             //刷新适配器
             adapter.notifyDataSetChanged();
         }
+
+        // 发消息每3000毫秒切换一次ViewPager(轮播图)页面
+        if (internalHandler == null) {
+            internalHandler = new InternalHandler();
+        }
+
+        /**
+         * 先移除上次的消息队列所有消息和回调
+         * if token is null all callbacks and messages will be removed.
+         */
+        internalHandler.removeCallbacksAndMessages(null);
+
+        // 发送一个延迟消息每3秒钟执行一次 发消息的时候可以发任务如下
+        internalHandler.postDelayed(new MyRunnable(), 3000);
     }
 
-    //内部类 新闻列表list view的适配器
+    /**
+     * 自定义handler 用于切换ViewPager（轮播图）
+     */
+    class InternalHandler extends Handler{
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            // 切换ViewPager（轮播图）的下一个页面
+            int item = (viewpager.getCurrentItem() + 1) % topnews.size();
+            viewpager.setCurrentItem(item);
+            // 循环发送一个延迟消息每3秒钟执行一次 发消息的时候可以发任务如下
+            internalHandler.postDelayed(new MyRunnable(), 3000);
+        }
+    }
+
+    /**
+     * 自定义Runnable 这里的代码可以省略↓
+     */
+    class MyRunnable implements Runnable{
+
+        /**
+         * run方法创建在哪个线程执行就在哪个线程
+         */
+        @Override
+        public void run() {
+            // 循环发送一个延迟消息每3秒钟执行一次
+            internalHandler.sendEmptyMessage(0);
+        }
+    }
+
+    // 内部类 新闻列表list view的适配器
     class TabDetailPagerListAdapter extends BaseAdapter{
 
         @Override
@@ -395,30 +462,30 @@ public class TabDetailPager extends MenuDetailBasePager{
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            //根据位置设置数据
+            // 根据位置设置数据
             TabDetailPagerBean.DataBean.NewsData newsData = news.get(position);
             String imageUrl =Constants.BASE_URL + newsData.getListimage();
-            //请求图片使用xUtils 可以使用
+            // 请求图片使用xUtils 可以使用
             //x.image().bind(viewHolder.iv_icon,imageUrl,imageOptions);
 
-            //Glide加载图片 diskCacheStrategy:磁盘缓存策略
+            // Glide加载图片 diskCacheStrategy:磁盘缓存策略
             Glide.with(context).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(
                     R.drawable.news_pic_default).error(R.drawable.news_pic_default).
                     into(viewHolder.iv_icon);
 
-            //设置标题
+            // 设置标题
             viewHolder.tv_title.setText(newsData.getTitle());
 
-            //设置 时间
+            // 设置 时间
             viewHolder.tv_time.setText(newsData.getPubdate());
 
-            //用户点击过（阅读过）的变成灰色
+            // 用户点击过（阅读过）的变成灰色
             String idArray = CacheUtils.getString(context,READ_ARRAY_ID);
             if (idArray.contains(newsData.getId()+"")){
-                //设置灰色
+                // 设置灰色
                 viewHolder.tv_title.setTextColor(Color.GRAY);
             }else{
-                //设置黑色
+                // 设置黑色
                 viewHolder.tv_title.setTextColor(Color.BLACK);
             }
 
@@ -426,7 +493,7 @@ public class TabDetailPager extends MenuDetailBasePager{
         }
     }
 
-    //list view适配器的 ViewHolder
+    // list view适配器的 ViewHolder
     static class ViewHolder{
         ImageView iv_icon;
         TextView tv_title;
@@ -434,12 +501,12 @@ public class TabDetailPager extends MenuDetailBasePager{
     }
 
 
-    //添加view pager中的指示器 灰红点
+    // 添加view pager中的指示器 灰红点
     private void addPoint() {
         //先移除之前的子控件
         ll_point_group.removeAllViews();
 
-        //根据数组中的元素个数创建banner指示器上的点
+        // 根据数组中的元素个数创建banner指示器上的点
         for (int i = 0; i < topnews.size(); i++) {
             ImageView imageView = new ImageView(context);
             imageView.setBackgroundResource(R.drawable.point_selector);
@@ -464,7 +531,7 @@ public class TabDetailPager extends MenuDetailBasePager{
         }
     }
 
-    //内部类 实现viewpager页面改变接口
+    // 内部类 实现viewpager页面改变接口
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
@@ -485,8 +552,31 @@ public class TabDetailPager extends MenuDetailBasePager{
         }
 
         @Override
-        public void onPageScrollStateChanged(int i) {
+        public void onPageScrollStateChanged(int state) {
+            // ViewPager（轮播图）处于拖拽状态
+            if (state == ViewPager.SCROLL_STATE_DRAGGING){
+                isDragging = true;
 
+                Log.e("TabDeatilPager", "拖拽");
+                // 拖拽的时候移除消息
+                internalHandler.removeCallbacksAndMessages(null);
+            }else if (state == ViewPager.SCROLL_STATE_SETTLING && isDragging){
+                // ViewPager（轮播图）处于惯性滚动状态
+                isDragging = false;
+
+                Log.e("TabDeatilPager", "惯性滚动");
+                // 发消息（发之前移除一下避免重复发了）
+                internalHandler.removeCallbacksAndMessages(null);
+                internalHandler.postDelayed(new MyRunnable(), 3000);
+            }else if (state == ViewPager.SCROLL_STATE_IDLE && isDragging){
+                // ViewPager（轮播图）处于静止状态
+                isDragging = false;
+
+                Log.e("TabDeatilPager", "静止状态");
+                // 发消息（发之前移除一下避免重复发了）
+                internalHandler.removeCallbacksAndMessages(null);
+                internalHandler.postDelayed(new MyRunnable(), 3000);
+            }
         }
     }
 
@@ -507,37 +597,74 @@ public class TabDetailPager extends MenuDetailBasePager{
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-            //使用Java代码动态创建imageview
+            // 使用Java代码动态创建imageview
             ImageView imageView = new ImageView(context);
 
-            //设置背景(默认图片）占位图
+            // 设置背景(默认图片）占位图
             imageView.setBackgroundResource(R.drawable.home_scroll_default);
-            //设置拉伸类型 X轴 和 Y轴方向拉伸
+            // 设置拉伸类型 X轴 和 Y轴方向拉伸
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-            //添加到容器中即viewpager中
+            // 添加到容器中即viewpager中
             container.addView(imageView);
 
-            //根据索引获取数据
+            // 根据索引获取数据
             TabDetailPagerBean.DataBean.TopnewsData topnewsData = topnews.get(position);
-            //图片请求地址的拼接
+            // 图片请求地址的拼接
             String imageUrl = Constants.BASE_URL + topnewsData.getTopimage();
 
-            //联网请求图片 xUtil 有和 Glide 类似的功能
+            // 联网请求图片 xUtil 有和 Glide 类似的功能
             //x.image().bind(imageView,imageUrl,imageOptions);
             x.image().bind(imageView,imageUrl);
+
+            // 轮播图上的某个imageView被触摸了
+            imageView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            // 用户手按下
+                            Log.e("TabDeatilPager", "用户手按下ACTION_DOWN");
+
+                            // 将消息移除 轮播图暂时不要动
+                            internalHandler.removeCallbacksAndMessages(null);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            // 用户手抬起
+                            Log.e("TabDeatilPager", "用户手抬起ACTION_UP");
+
+                            // 发送一个延迟消息每3秒钟执行一次 轮播图继续动起来（发之前最好先移除一下）
+                            internalHandler.removeCallbacksAndMessages(null);
+                            internalHandler.postDelayed(new MyRunnable(), 3000);
+                            break;
+                        /// 监听ViewPager（轮播图）滚动事件后这里可以不要了
+                        // ase MotionEvent.ACTION_CANCEL:
+                        //    // 用户取消
+                        //    Log.e("TabDeatilPager", "用户取消ACTION_CANCEL");
+
+                        //    // 用户取消时也要重新动起来（发之前最好先移除一下）
+                        //    internalHandler.removeCallbacksAndMessages(null);
+                        //    internalHandler.postDelayed(new MyRunnable(), 3000);
+                        //    break;
+                    }
+
+                    // 触摸事件处理了这里返回true （又想触摸事件又想点击事件返回false）
+                    return true;
+                }
+            });
 
             return imageView;
         }
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            //super.destroyItem(container, position, object);
+            // super.destroyItem(container, position, object);
             container.removeView((View) object);
         }
     }
 
-    //json对象转Java模型对象
+    // json对象转Java模型对象
     private TabDetailPagerBean parsedJson(String json) {
         return new Gson().fromJson(json,TabDetailPagerBean.class);
     }

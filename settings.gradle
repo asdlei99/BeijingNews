@@ -1,2 +1,2 @@
 include ':app',':SlidingMenu_library',':xutils',':ViewPagerIndicator_library', ':LERefreshlistview',
-        ':PullToRefresh_library',':AndroidAndJs'
+        ':PullToRefresh_library',':AndroidAndJs',':VolleyDemo'

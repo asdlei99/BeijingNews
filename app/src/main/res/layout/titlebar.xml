@@ -69,4 +69,17 @@
 
     </LinearLayout>
 
+    <!--注意 ImageButton 有背景 不想要可以设置为透明
+   android:layout_marginLeft="8dp"-->
+    <ImageButton
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/icon_pic_grid_type"
+        android:id="@+id/ib_swich_list_grid"
+        android:layout_marginRight="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>

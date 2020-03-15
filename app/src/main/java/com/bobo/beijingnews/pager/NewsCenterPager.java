@@ -1,12 +1,22 @@
 package com.bobo.beijingnews.pager;
 
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bobo.beijingnews.activity.MainActivity;
 import com.bobo.beijingnews.base.BasePager;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
@@ -21,6 +31,7 @@ import com.bobo.beijingnews.menudetailpager.VoteMenuDetailPager;
 import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
 import com.bobo.beijingnews.utils.LogUtil;
+import com.bobo.beijingnews.volley.VolleyManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -31,11 +42,12 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 求知自学网 on 2019/7/20. Copyright © Leon. All rights reserved.
+ * Created by 公众号IT波 on 2019/7/20. Copyright © Leon. All rights reserved.
  * Functions: 新闻中心
  */
 public class NewsCenterPager extends BasePager {
@@ -45,6 +57,11 @@ public class NewsCenterPager extends BasePager {
 
     /**详情页的集合*/
     private ArrayList<MenuDetailBasePager> detailBasePagers;
+
+    /**
+     * 网络请求的起始事件（用于对比Okhttp 和 Volley 的性能）
+     */
+    private long startTime;
 
 
     public NewsCenterPager(Context context) {
@@ -57,23 +74,23 @@ public class NewsCenterPager extends BasePager {
 
         LogUtil.e("新闻中心数据被加载了");
 
-        //点击侧划的按钮-点击事件的监听在父类中实现了
+        // 点击侧划的按钮-点击事件的监听在父类中实现了
         ib_menu.setVisibility(View.VISIBLE);
 
         //1.设置标题
         tv_title.setText("新闻中心");
 
-        //2.联网请求，得到数据，创建视图
-        TextView textView = new TextView(context);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        textView.setTextSize(25);
+        // 2.联网请求，得到数据，创建视图
+        // TextView textView = new TextView(context);
+        // textView.setGravity(Gravity.CENTER);
+        // textView.setTextColor(Color.RED);
+        // textView.setTextSize(25);
 
-        //3.把子视图添加到BasePager的FrameLayout中
-        fl_content.addView(textView);
+        // //3.把子视图添加到BasePager的FrameLayout中
+        // fl_content.addView(textView);
 
-        //4.绑定数据
-        textView.setText("新闻中心内容");
+        // //4.绑定数据
+        // textView.setText("新闻中心内容");
 
         //（联网请求前）获取缓存数据 默认为""
         String saveJson = CacheUtils.getString(context,Constants.NEWSCENTER_PAGER_URL);
@@ -83,11 +100,82 @@ public class NewsCenterPager extends BasePager {
             processData(saveJson);
         }
 
-        //联网请求数据
+        // TODO:加载框显示
+
+        startTime = SystemClock.uptimeMillis();
+
+        // 联网请求数据xUtils3
         getDataFromNet();
+
+        // 联网请求Volley
+        // getDataFromNetByVolley();
     }
 
-    /**使用xUtils3 联网请求数据 xUtils3 application中初始化*/
+    /**
+     * 使用Volley做网络请求
+     */
+    private void getDataFromNetByVolley() {
+
+        /// 创建一个请求队列（VolleyManager.getRequestQueue()代替）
+        // RequestQueue queue = Volley.newRequestQueue(context);
+
+        // String请求
+        StringRequest request = new StringRequest(Request.Method.GET, Constants.NEWSCENTER_PAGER_URL,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String result) {
+
+                        long endTime = SystemClock.uptimeMillis();
+
+                        long passTime = endTime - startTime;
+
+                        LogUtil.e("Volley 请求用时:" + passTime);
+
+                        // 请求成功的处理
+                        LogUtil.e("用Volley 联网请求成功 ："+result);
+
+                        //缓存数据本地持久化保存
+                        CacheUtils.putString(context, Constants.NEWSCENTER_PAGER_URL, result);
+
+                        processData(result);
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // 请求失败的处理
+                LogUtil.e("用Volley 联网请求失败 ："+ volleyError.getMessage());
+            }
+        }){
+            /**
+             * 解决Volley乱码
+             * @param response
+             * @return
+             */
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+
+                try {
+                    String parsed = new String(response.data, "UTF-8");
+                    return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        // 添加到队列
+        //  queue.add(request);原来的写法
+        VolleyManager.getRequestQueue().add(request);
+    }
+
+    /**
+     * 使用xUtils3 联网请求数据 xUtils3 application中初始化
+     */
     private void getDataFromNet(){
 
         RequestParams params = new RequestParams(Constants.NEWSCENTER_PAGER_URL);
@@ -98,12 +186,16 @@ public class NewsCenterPager extends BasePager {
             public void onSuccess(String result) {
                 LogUtil.e("用xUtils3 联网请求成功 ："+result);
 
+                long endTime = SystemClock.uptimeMillis();
+
+                long passTime = endTime - startTime;
+
+                LogUtil.e("xUtils3 请求用时:" + passTime);
+
                 //缓存数据本地持久化保存
-                CacheUtils.putString(context,Constants.NEWSCENTER_PAGER_URL,result);
+                CacheUtils.putString(context, Constants.NEWSCENTER_PAGER_URL, result);
 
                 processData(result);
-
-                //设置适配器
             }
 
             @Override
@@ -140,7 +232,7 @@ public class NewsCenterPager extends BasePager {
         detailBasePagers = new ArrayList<>();
         detailBasePagers.add(new NewsMenuDetailPager(context,data.get(0)));//新闻中心下： 新闻详情页面
         detailBasePagers.add(new TopicMenuDetailPager(context,data.get(0)));//新闻中心下： 专题详情页面
-        detailBasePagers.add(new PhotosMenuDetailPager(context));//新闻中心下： 图组详情页面
+        detailBasePagers.add(new PhotosMenuDetailPager(context, data.get(2)));//新闻中心下： 图组详情页面
         detailBasePagers.add(new InteracMenuDetailPager(context));//新闻中心下： 互动详情页面
         detailBasePagers.add(new VoteMenuDetailPager(context));//新闻中心下： 投票详情页面
 
@@ -269,5 +361,14 @@ public class NewsCenterPager extends BasePager {
         View rootView = detailBasePager.rootView;
         detailBasePager.initData();//初始化数据
         fl_content.addView(rootView);
+
+        // 导航栏右上角的切换布局的按钮（只有组图才显示）
+        if (position == 2){
+            // 图组页
+            ib_swich_list_grid.setVisibility(View.VISIBLE);
+        }else{
+            // 其他页面
+            ib_swich_list_grid.setVisibility(View.GONE);
+        }
     }
 }

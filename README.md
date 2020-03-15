@@ -1,7 +1,8 @@
 # BeijingNews
 波波北京（仿北京新闻）
 
-感谢以下开源 组织 机构 个人：尚硅谷 jfeinstein10/SlidingMenu wyouflf/xUtils3 Gson(谷歌)  JakeWharton/ViewPagerIndicator
+感谢以下开源 组织 机构 个人：尚硅谷 jfeinstein10/SlidingMenu wyouflf/xUtils3 Gson(谷歌)  JakeWharton/ViewPagerIndicator Volley
+（Volley的设计目标就是非常适合去进行数据量不大，但通信频繁的网络操作，而对于大数据量的网络操作，比如说下载文件等，Volley的表现就会非常糟糕）
 
 
 <div align="center">

@@ -2,6 +2,8 @@ package com.bobo.beijingnews;
 
 import android.app.Application;
 
+import com.bobo.beijingnews.volley.VolleyManager;
+
 import org.xutils.x;
 
 /**
@@ -20,5 +22,8 @@ public class BeijingNewsApplication extends Application {
         x.Ext.init(this);
         // 是否输出debug日志, 开启debug会影响性能.
         x.Ext.setDebug(true);
+
+        // 初始化Volloey
+        VolleyManager.init(this);
     }
 }

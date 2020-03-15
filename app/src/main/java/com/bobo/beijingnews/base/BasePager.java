@@ -41,6 +41,11 @@ public class BasePager {
     protected ImageButton ib_menu;
 
     /**
+     *  右上角点击切换listview 和 gridview的按钮 个别页面需要显示
+     */
+    protected ImageButton ib_swich_list_grid;
+
+    /**
      *加载各个子页面的 帧布局
      */
     protected FrameLayout fl_content;
@@ -67,6 +72,7 @@ public class BasePager {
         tv_title = (TextView)view.findViewById(R.id.tv_title);
         ib_menu = (ImageButton)view.findViewById(R.id.ib_menu);
         fl_content = (FrameLayout)view.findViewById(R.id.fl_content);
+        ib_swich_list_grid = (ImageButton)view.findViewById(R.id.ib_swich_list_grid);
         occupation = (View)view.findViewById(R.id.occupation);
 
         //点击侧划的按钮 只有部分子页面需要显示 的点击事件（打开/关闭左侧菜单）

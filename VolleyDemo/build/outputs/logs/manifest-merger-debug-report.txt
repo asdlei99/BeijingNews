@@ -1,0 +1,173 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\a7d607d0a866a8d2b6927b1a73a28ed7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\cae57d60ae29b3f8ead7a7366932c09b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\1c65faaa3271ebd68d7a9156a4c782b5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\02be6dec3ecc780fa41e9a4407908ccf\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\b15af01a2c2000e40abcac13531dd2a9\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\7f9e073835f4cb7ce1d2f21458b62c8b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\e0fcb2f195883dd5725acb31e4948b6f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\7160d9b56abeff39943c813f15d560dd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\7bd514258947a39a79614d7852445892\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\10547764642f214568b91b77d75a66f3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\d3ef54e8cdfb2ecb6a347f92203727f8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\d440b96d5886db019481c1ecd24a53a5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\20f1bc761831a6407fca66600b56742c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\92cad4b3e64f87a95ec823183d6f4248\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\36900d24a9f79b1becf3798c79b7743e\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\acfe9e1f1fde15925f8858ad320796cb\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\f63c3ce84652481113e516d98255e567\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7a40ca9b538000cd32603f6f6ae99f1e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\06c216845972cf8f0cff44767b9ffe29\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\979758e9213edf457a83427e0bac3b7c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\b1f6ddfe794838758761a9a2205b10b8\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\e26a72360cc40398f5147c05bc487ed1\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\f71dcf2509ffc17dee3630aee17cd482\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\419b1e937c5360e81437738611fbd45c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\0f2679806b7a00c12cefdd8d5b9ed65e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\ab41dfe9df972fa14bcf56a8a9c21da2\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:1-35:12
+	package
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:3:5-37
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\a7d607d0a866a8d2b6927b1a73a28ed7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\a7d607d0a866a8d2b6927b1a73a28ed7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\cae57d60ae29b3f8ead7a7366932c09b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\cae57d60ae29b3f8ead7a7366932c09b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\1c65faaa3271ebd68d7a9156a4c782b5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\1c65faaa3271ebd68d7a9156a4c782b5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\02be6dec3ecc780fa41e9a4407908ccf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\02be6dec3ecc780fa41e9a4407908ccf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\b15af01a2c2000e40abcac13531dd2a9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\b15af01a2c2000e40abcac13531dd2a9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\7f9e073835f4cb7ce1d2f21458b62c8b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\7f9e073835f4cb7ce1d2f21458b62c8b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\e0fcb2f195883dd5725acb31e4948b6f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\e0fcb2f195883dd5725acb31e4948b6f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\7160d9b56abeff39943c813f15d560dd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\7160d9b56abeff39943c813f15d560dd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\7bd514258947a39a79614d7852445892\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\7bd514258947a39a79614d7852445892\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\10547764642f214568b91b77d75a66f3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\10547764642f214568b91b77d75a66f3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\d3ef54e8cdfb2ecb6a347f92203727f8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\d3ef54e8cdfb2ecb6a347f92203727f8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\d440b96d5886db019481c1ecd24a53a5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\d440b96d5886db019481c1ecd24a53a5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\20f1bc761831a6407fca66600b56742c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\20f1bc761831a6407fca66600b56742c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\92cad4b3e64f87a95ec823183d6f4248\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\92cad4b3e64f87a95ec823183d6f4248\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\36900d24a9f79b1becf3798c79b7743e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\36900d24a9f79b1becf3798c79b7743e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\acfe9e1f1fde15925f8858ad320796cb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\acfe9e1f1fde15925f8858ad320796cb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\f63c3ce84652481113e516d98255e567\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\f63c3ce84652481113e516d98255e567\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7a40ca9b538000cd32603f6f6ae99f1e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7a40ca9b538000cd32603f6f6ae99f1e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\06c216845972cf8f0cff44767b9ffe29\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\06c216845972cf8f0cff44767b9ffe29\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\979758e9213edf457a83427e0bac3b7c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\979758e9213edf457a83427e0bac3b7c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\b1f6ddfe794838758761a9a2205b10b8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\b1f6ddfe794838758761a9a2205b10b8\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\e26a72360cc40398f5147c05bc487ed1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\e26a72360cc40398f5147c05bc487ed1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\f71dcf2509ffc17dee3630aee17cd482\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\f71dcf2509ffc17dee3630aee17cd482\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\419b1e937c5360e81437738611fbd45c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\419b1e937c5360e81437738611fbd45c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\0f2679806b7a00c12cefdd8d5b9ed65e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\0f2679806b7a00c12cefdd8d5b9ed65e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\ab41dfe9df972fa14bcf56a8a9c21da2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\ab41dfe9df972fa14bcf56a8a9c21da2\AndroidManifest.xml:20:5-44
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:7:5-9:41
+	android:targetSdkVersion
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:9:9-38
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:8:9-34
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:10:5-66
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:10:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:11:5-80
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:11:22-78
+application
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:14:5-33:19
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\36900d24a9f79b1becf3798c79b7743e\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\36900d24a9f79b1becf3798c79b7743e\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\acfe9e1f1fde15925f8858ad320796cb\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\acfe9e1f1fde15925f8858ad320796cb\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Wangqian\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\36900d24a9f79b1becf3798c79b7743e\AndroidManifest.xml:22:18-91
+	android:label
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:18:9-41
+	android:icon
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:17:9-45
+	android:allowBackup
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:16:9-35
+	android:theme
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:19:9-40
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:15:9-38
+activity#com.atguigu.testvolley.MainActivity
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:20:9-28:20
+	android:label
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:22:13-45
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:21:13-63
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:23:13-27:29
+action#android.intent.action.MAIN
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:24:17-69
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:24:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:26:17-77
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:26:27-74
+activity#com.atguigu.testvolley.TextDataActivity
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:29:9-85
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:29:19-73
+activity#com.atguigu.testvolley.ImageViewDataActivity
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:30:9-90
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:30:19-78
+activity#com.atguigu.testvolley.imagerlist.ImagerListActivity
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:31:9-66
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:31:19-64
+activity#com.atguigu.testvolley.textdata.TextDataOkActivity
+ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:32:9-64
+	android:name
+		ADDED from D:\AndroidCode\BeijingNews\VolleyDemo\src\main\AndroidManifest.xml:32:19-62
