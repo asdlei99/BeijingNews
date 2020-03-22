@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
@@ -56,6 +58,13 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
      * listview / gridview 的数据源
      */
     private List<PhotosMenuDetailPagerBean.DataBean.NewsBean> news;
+
+    /**
+     * 记录当前是显示list view还是grid view的变量 默认是 true 即 list view
+     * true 显示list view 隐藏grid view
+     * false 是显示 grid view 隐藏 list view
+     */
+    private boolean isShowListView = true;
 
     public PhotosMenuDetailPager(Context context, NewsCenterPagerBean2.DetailPagerData detailPagerData) {
         super(context);
@@ -155,12 +164,54 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         // 解析json
         PhotosMenuDetailPagerBean bean = parsedJson(json);
 
-        LogUtil.e("图组页 " + bean.getData().getNews().get(0).getTitle());
+        LogUtil.e("图组解析成功== " + bean.getData().getNews().get(0).getTitle());
+
+        // 是显示 list view 还是显示grid view 默认显示 grid view（觉得这个不写也可以）
+        isShowListView = true;
 
         // 设置适配器
         news = bean.getData().getNews();
         adapter = new PhotosMenuDetailPagerAdapter();
         listView.setAdapter(adapter);
+    }
+
+    /**
+     * 图组页面 右上角的按钮被点击了（只有图组页右上角有按钮）
+     * 切换list view 和 grid view的方法
+     * @param ib_swich_list_grid
+     */
+    public void switchListViewAndGridView(ImageButton ib_swich_list_grid) {
+
+        // 如果是要显示list view
+        if (isShowListView){
+            /// 修改状态 注释原因：已经合并成一句 isShowListView = !isShowListView;
+            // isShowListView = false;
+
+            // 切换到grid view 隐藏 list view
+            gridView.setVisibility(View.VISIBLE);
+            adapter = new PhotosMenuDetailPagerAdapter();
+            gridView.setAdapter(adapter);
+            listView.setVisibility(View.GONE);
+
+            // 按钮显示--list view
+            ib_swich_list_grid.setImageResource(R.drawable.icon_pic_list_type);
+
+        }else{
+            /// 修改状态 注释原因：已经合并成一句 isShowListView = !isShowListView;
+            // isShowListView = true;
+
+            // 显示list view 隐藏 grid view
+            listView.setVisibility(View.VISIBLE);
+            adapter = new PhotosMenuDetailPagerAdapter();
+            listView.setAdapter(adapter);
+            gridView.setVisibility(View.GONE);
+
+            // 按钮显示--grid view
+            ib_swich_list_grid.setImageResource(R.drawable.icon_pic_grid_type);
+        }
+
+        // 状态取反
+        isShowListView = !isShowListView;
     }
 
     /**
@@ -175,12 +226,12 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return position;
         }
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
@@ -195,8 +246,19 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
                 viewHolder.tv_title = convertView.findViewById(R.id.tv_title);
                 convertView.setTag(viewHolder);
             }else{
-
+                viewHolder = (ViewHolder) convertView.getTag();
             }
+
+            // 根据位置（position）得到对应的数据
+            PhotosMenuDetailPagerBean.DataBean.NewsBean newsBean = news.get(position);
+
+            // 设置标题
+            viewHolder.tv_title.setText(newsBean.getTitle());
+
+            // 使用Volley请求-设置图片
+            String imageUrl = Constants.BASE_URL + newsBean.getSmallimage();
+            loaderImager(viewHolder, imageUrl);
+
 
             return convertView;
         }
@@ -206,6 +268,47 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         ImageView iv_icon;
         TextView tv_title;
     }
+
+    /**
+     * 使用Volley请求-设置图片
+     * @param viewHolder
+     * @param imageurl
+     */
+    private void loaderImager(final ViewHolder viewHolder, String imageurl) {
+
+        /**
+         * 异步请求成功根据url找到对应的imageview （要是全部url都一样？）
+         * 直接在这里请求会乱位置
+         */
+        viewHolder.iv_icon.setTag(imageurl);
+
+        ImageLoader.ImageListener listener = new ImageLoader.ImageListener() {
+            @Override
+            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                if (imageContainer != null) {
+
+                    if (viewHolder.iv_icon != null) {
+                        if (imageContainer.getBitmap() != null) {
+                            // 网络图片不为空设置网络图片
+                            viewHolder.iv_icon.setImageBitmap(imageContainer.getBitmap());
+                        } else {
+                            // 网络图片为空设置默认图片
+                            viewHolder.iv_icon.setImageResource(R.drawable.home_scroll_default);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // 如果出错，则说明都不显示（简单处理），最好准备一张出错图片
+                viewHolder.iv_icon.setImageResource(R.drawable.home_scroll_default);
+            }
+        };
+
+        // 使用Volley发起请求
+        VolleyManager.getImageLoader().get(imageurl, listener);
+    }
+
 
     /**
      * 专门解析json的方法

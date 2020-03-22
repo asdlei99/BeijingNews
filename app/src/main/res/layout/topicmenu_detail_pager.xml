@@ -9,10 +9,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.viewpagerindicator.TabPageIndicator
-            android:id="@+id/tabPageIndicator"
+        <!--  <com.viewpagerindicator.TabPageIndicator -->
+        <!-- android:id="@+id/tabPageIndicator" -->
+        <!-- android:layout_gravity="center_vertical" -->
+        <!-- android:layout_width="0dp" -->
+        <!-- android:layout_weight="1" -->
+        <!-- android:layout_height="wrap_content"/> -->
+
+        <!-- 这个页面（专题页）用的是TabLayout 新闻页用的是 TabPageIndicator -->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
             android:layout_gravity="center_vertical"
             android:layout_width="0dp"
+            style="@style/MyCustomTabLayout"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
 

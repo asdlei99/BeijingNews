@@ -2,6 +2,7 @@ package com.bobo.beijingnews.base;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageButton;
 
 /**
  * Created by 求知自学网 on 2019/7/27. Copyright © Leon. All rights reserved.
@@ -29,5 +30,4 @@ public abstract class MenuDetailBasePager {
     public void initData(){
 
     }
-
 }

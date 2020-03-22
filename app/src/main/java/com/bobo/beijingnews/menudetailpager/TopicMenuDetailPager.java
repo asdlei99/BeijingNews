@@ -3,21 +3,23 @@ package com.bobo.beijingnews.menudetailpager;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bobo.beijingnews.R;
 import com.bobo.beijingnews.activity.MainActivity;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
-import com.bobo.beijingnews.menudetailpager.tabdetailpager.TabDetailPager;
 import com.bobo.beijingnews.menudetailpager.tabdetailpager.TopicDetailPager;
 import com.bobo.beijingnews.utils.LogUtil;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.viewpagerindicator.TabPageIndicator;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -28,16 +30,17 @@ import java.util.List;
 /**
  * Created by 求知自学网 on 2019/7/27. Copyright © Leon. All rights reserved.
  * Functions: 新闻中心下： 专题菜单页面
+ * 这个页面用的是TabLauout 作指示器 新闻页用的是ViewPagerIndicator
  */
 public class TopicMenuDetailPager extends MenuDetailBasePager {
 
-    @ViewInject(R.id.tabPageIndicator)
-    private TabPageIndicator tabPageIndicator;
+    @ViewInject(R.id.tablayout)
+    private TabLayout tabLayout;
 
     @ViewInject(R.id.viewpager)
     private ViewPager viewPager;
 
-    //tabpageindicator 右边的 右方向箭头
+    //tabLayout 右边的 右方向箭头
     @ViewInject(R.id.ib_tab_next)
     private ImageButton ib_tab_next;
 
@@ -60,7 +63,7 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
         //xUtils3 实例化控件
         x.view().inject(TopicMenuDetailPager.this,view);
 
-        //设置tabpageindicator 右边的右方向箭头的点击事件
+        //设置tabLayout 右边的右方向箭头的点击事件
         ib_tab_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,17 +90,52 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
             tabDetailPagers.add(new TopicDetailPager(context,children.get(i)));
         }
 
+        /**
+         * 之前在别的项目遇到的bug 要是在出现了 打开 viewPager.setOffscreenPageLimit(children.size());
+         * 使用了viewpager和listview进行页面数据显示，在切换viewpager的时候会导致前面的fragment页面数据丢失，
+         * 这是fragment重新加载而造成的问题，如果是固定数量viewpager，只需要指定页面数量，即可禁止重新加载：
+         */
+        // viewPager.setOffscreenPageLimit(children.size());
+
         //设置适配器
         viewPager.setAdapter(new MyNewsMenuDetailPagerAdapter());
 
-        //viewPager和tabPageIndicator 关联
-        tabPageIndicator.setViewPager(viewPager);
+        /// viewPager和tabLayout 关联
+        // tabLayout.setViewPager(viewPager); TabPageIndicator的代码
+        tabLayout.setupWithViewPager(viewPager);
 
-        //FIXME:注意使用tabPageIndicator以后监听页面的变化将会用tabPageIndicator(不要再用ViewPager了)
-        tabPageIndicator.setOnPageChangeListener(new MyOnPageChangeListener());
+        // 注意使用TabPageIndicator以后监听页面的变化将会用tabLayout(不要再用ViewPager了)
+        // tabLayout.setOnPageChangeListener(new MyOnPageChangeListener()); TabPageIndicator的代码
+        viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
+
+        // TabLayout设置滑动或者固定
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+        // 自定义tabLayout指示器（下面带小红点） 下面注释的代码可以正常使用
+        // for (int i = 0;i < tabLayout.getTabCount();i++){
+        //     TabLayout.Tab tab = tabLayout.getTabAt(i);
+        //     tab.setCustomView(getTabView(i));
+        // }
     }
 
-    //内部类实现tabPageIndicator监听页面的变化
+    /**
+     * 自定义tabLayout指示器
+     * @param position
+     * @return
+     */
+    public View getTabView(int position){
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_item, null);
+        TextView tv = (TextView)view.findViewById(R.id.textview);
+        tv.setText(children.get(position).getTitle());
+
+        /// 注释原因：xml中已经写了
+        // ImageView img = view.findViewById(R.id.imageview);
+        // img.setImageResource(R.drawable.dot_focus);
+
+        return view;
+    }
+
+    //内部类实现tabLayout监听页面的变化
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener{
 
         @Override
@@ -135,7 +173,7 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            //注意写了这个方法tabPageIndicator上就有标题了
+            //注意写了这个方法tabLayout上就有标题了
             return children.get(position).getTitle();
         }
 

@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!-- 这个页面 （新闻页）用的是 TabPageIndicator 专题页用的是TabLayout -->
         <com.viewpagerindicator.TabPageIndicator
             android:id="@+id/tabPageIndicator"
             android:layout_gravity="center_vertical"

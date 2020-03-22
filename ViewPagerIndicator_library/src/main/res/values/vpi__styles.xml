@@ -15,8 +15,10 @@
 -->
 
 <resources>
-    <!--parent="android:Theme" 改为： parent="Base.Theme.AppCompat.Light.DarkActionBar"-->
-    <style name="Theme.PageIndicatorDefaults" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+    <!-- 原来 parent="android:Theme" 会闪退 和 TabLayout 有冲突
+         我改为（可以使用）： parent="Base.Theme.AppCompat.Light.DarkActionBar"
+         杨光福老师改为（依赖V7包）：Theme.AppCompat.Light.NoActionBar -->
+    <style name="Theme.PageIndicatorDefaults" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>

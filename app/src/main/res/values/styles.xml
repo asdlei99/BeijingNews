@@ -17,6 +17,24 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-    </style>>
+    </style>
+
+    <!-- 自定义指示器的风格 注意新闻和专题使用的不同控件实现的功能 新闻是用：TabPageIndicator
+         专题是用 android.support.design.widget.TabLayout  这里的style是给专题使用的-->
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabMaxWidth">72dp</item>
+        <item name="tabMinWidth">72dp</item>
+        <item name="tabIndicatorColor">#33B5E5</item>
+        <item name="tabIndicatorHeight">5dp</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+        <item name="tabSelectedTextColor">#33B5E5</item>
+    </style>
+
+    <!-- 自定义标签文字外观上面的 tabTextAppearance属性扩展 -->
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="textAllCaps">false</item>
+    </style>
 
 </resources>

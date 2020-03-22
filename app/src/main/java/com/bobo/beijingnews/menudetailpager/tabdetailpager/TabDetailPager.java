@@ -287,6 +287,9 @@ public class TabDetailPager extends MenuDetailBasePager{
     //联网请求数据
     private void getDataFromNet(){
 
+        // banner上之前 高亮（红色）显示的位置 从新设置为0
+        prePosition = 0;
+
         RequestParams params = new RequestParams(url);
 
         //设置链接超时时间

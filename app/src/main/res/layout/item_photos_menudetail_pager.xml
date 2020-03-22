@@ -19,7 +19,7 @@
             android:layout_height="180dp" />
 
         <TextView
-            android:id="@+id/"
+            android:id="@+id/tv_title"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_marginTop="8dp"

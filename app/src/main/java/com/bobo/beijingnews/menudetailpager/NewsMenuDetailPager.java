@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -29,6 +28,7 @@ import java.util.List;
 /**
  * Created by 求知自学网 on 2019/7/27. Copyright © Leon. All rights reserved.
  * Functions: 新闻中心下： 新闻菜单页面
+ * 这个页面用的是ViewPagerIndicator 作指示器 专题页面用的是TabLauout
  */
 public class NewsMenuDetailPager extends MenuDetailBasePager {
 
