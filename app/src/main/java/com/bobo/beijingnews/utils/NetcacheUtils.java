@@ -28,16 +28,28 @@ public class NetcacheUtils {
      */
     public static final int FAIL = 20032202;
 
+    /**
+     * 本地缓存工具类
+     */
+    private LocalCacheUtils localCacheUtils;
+
+    /**
+     * 内存缓存工具类
+     */
+    private MemoryCacheUtils memoryCacheUtils;
+
     private Handler handler;
 
     // 线程池
     private ExecutorService service;
 
-    public NetcacheUtils(Handler handler) {
+    public NetcacheUtils(Handler handler, LocalCacheUtils localCacheUtils, MemoryCacheUtils memoryCacheUtils) {
         this.handler = handler;
 
         // 创建线程池
         service = Executors.newFixedThreadPool(10);
+        this.memoryCacheUtils = memoryCacheUtils;
+        this.localCacheUtils = localCacheUtils;
     }
 
     /**
@@ -104,9 +116,10 @@ public class NetcacheUtils {
                     handler.sendMessage(msg);
 
                     // 在内存中缓存一份
+                    memoryCacheUtils.putBitmap(imageUrl, bitmap);
 
                     // 在本地（磁盘中）缓存一份
-
+                    localCacheUtils.putBitmap(imageUrl, bitmap);
                 }
 
             } catch (IOException e) {
