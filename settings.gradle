@@ -1,2 +1,2 @@
-include ':app',':SlidingMenu_library',':xutils',':ViewPagerIndicator_library', ':LERefreshlistview',
-        ':PullToRefresh_library',':AndroidAndJs',':VolleyDemo'
+include ':app',':SlidingMenu_library',':xutils',':ViewPagerIndicator_library', ':LERefreshlistview', ':okhttpsample',
+        ':PullToRefresh_library',':AndroidAndJs',':VolleyDemo','ImageLoader_library','PhotoView_library'

@@ -25,10 +25,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     // Android-侧滑菜单
     implementation project(':SlidingMenu_library')
-
     //xUtils3 我采用 import Module 的方式  3.3.36
     //implementation 'org.xutils:xutils:3.5.1'
     implementation project(':xutils')
@@ -36,10 +34,15 @@ dependencies {
     implementation project(':ViewPagerIndicator_library')
     implementation project(':LERefreshlistview')
     implementation project(':PullToRefresh_library')
-
     /**
      * TabLayout安卓原生 和 ViewPagerIndicator功能一样 新闻页指示器
      * TabLayout库的全名 com.android.support:design:28.0.0-alpha1 我去掉后面的 -alpha1
      */
     implementation 'com.android.support:design:28.0.0'
+
+    // 加载图片神器之一
+    implementation project(':ImageLoader_library')
+
+    // 点击查看大图第三方框架
+    implementation project(':PhotoView_library')
 }

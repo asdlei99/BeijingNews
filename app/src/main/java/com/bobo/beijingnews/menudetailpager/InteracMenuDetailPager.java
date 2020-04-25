@@ -33,7 +33,12 @@ import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
 import com.bobo.beijingnews.utils.LogUtil;
 import com.bobo.beijingnews.volley.VolleyManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.squareup.picasso.Picasso;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -279,6 +284,23 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
      */
     class PhotosMenuDetailPagerAdapter extends BaseAdapter {
 
+        // 使用使用ImageLoader加载图片实例化options
+        private DisplayImageOptions options;
+
+        private PhotosMenuDetailPagerAdapter() {
+            // 使用使用ImageLoader加载图片实例化options
+            options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.home_scroll_default)
+                    .showImageForEmptyUri(R.drawable.home_scroll_default)
+                    .showImageOnFail(R.drawable.home_scroll_default)
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .considerExifParams(true)
+                    .bitmapConfig(Bitmap.Config.RGB_565)
+                    .displayer(new RoundedBitmapDisplayer(10))// 设置矩形圆角
+                    .build();
+        }
+
         @Override
         public int getCount() {
             return news == null ? 0 : news.size();
@@ -318,19 +340,36 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
             // 使用Volley请求-设置图片
             String imageUrl = Constants.BASE_URL + newsBean.getSmallimage();
 
-            /// 使用Volley请求图片-设置图片的方法
+            /// ①使用Volley请求图片-设置图片的方法
             // loaderImager(viewHolder, imageUrl);
 
-            // ---↓使用自定义三级缓存请求图片↓---
+            // ②使用自定义三级缓存请求图片
 
             // 设置tag为了配合三级缓存回传图片
-            viewHolder.iv_icon.setTag(position);
+            // viewHolder.iv_icon.setTag(position);
 
             // 自定义三级缓存请求图片
-            Bitmap bitmap = bitmapCacheUtils.getBitmap(imageUrl, position);
-            if (bitmap != null) {
-                viewHolder.iv_icon.setImageBitmap(bitmap);
-            }
+            // Bitmap bitmap = bitmapCacheUtils.getBitmap(imageUrl, position);
+            // if (bitmap != null) {
+            //     viewHolder.iv_icon.setImageBitmap(bitmap);
+            // }
+
+            // ③使用Picasso请求并设置图片
+            // Picasso.with(context).load(imageUrl)
+            //         .placeholder(R.drawable.home_scroll_default)
+            //         .error(R.drawable.home_scroll_default)
+            //         .into(viewHolder.iv_icon);
+
+            // ④使用Glide请求并设置图片
+            // Glide.with(context).load(imageUrl)
+            //          .diskCacheStrategy(DiskCacheStrategy.ALL)
+            //          .placeholder(R.drawable.home_scroll_default)
+            //          .error(R.drawable.home_scroll_default)
+            //          .into(viewHolder.iv_icon);
+
+            // ⑤使用ImageLoader加载图片
+            com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageUrl,
+                    viewHolder.iv_icon, options);
 
             return convertView;
         }

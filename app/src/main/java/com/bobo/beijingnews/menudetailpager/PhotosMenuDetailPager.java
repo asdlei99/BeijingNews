@@ -1,6 +1,7 @@
 package com.bobo.beijingnews.menudetailpager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.bobo.beijingnews.activity.ShowImageActivity;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.domain.PhotosMenuDetailPagerBean;
@@ -55,6 +57,11 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     private String url;
 
     /**
+     * ListView和GridView的适配器的点击事件
+     */
+    private  OnPhotosMenuDetailPagerAdapterLinstener mOnPhotosAdapterLinstener;
+
+    /**
      * listview / gridview 的数据源
      */
     private List<PhotosMenuDetailPagerBean.DataBean.NewsBean> news;
@@ -79,6 +86,19 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
 
         // 使用xUtils 初始化布局
         x.view().inject(PhotosMenuDetailPager.this, view);
+
+        // 设置点击某条的item的监听
+        mOnPhotosAdapterLinstener = new OnPhotosMenuDetailPagerAdapterLinstener() {
+            @Override
+            public void onItemClick(int position, String largeImageUrl) {
+                // 跳转到查看大图Activity
+                Intent intent = new Intent(context, ShowImageActivity.class);
+                // 跳转携带参数
+                intent.putExtra("url", largeImageUrl);
+                context.startActivity(intent);
+            }
+        };
+
         return view;
     }
 
@@ -235,7 +255,7 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             ViewHolder viewHolder;
 
@@ -259,9 +279,36 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
             String imageUrl = Constants.BASE_URL + newsBean.getSmallimage();
             loaderImager(viewHolder, imageUrl);
 
+            // 获取用于全屏展示的大图的路径
+            final String largeImageUrl = Constants.BASE_URL + newsBean.getLargeimage();
+
+            // 由于ListView安卓原生的点击事件在高版本系统上没有效果所以采用自定义的
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnPhotosAdapterLinstener != null) {
+                        mOnPhotosAdapterLinstener.onItemClick(position, largeImageUrl);
+                    }
+                }
+            });
 
             return convertView;
         }
+
+
+    }
+
+    /**
+     * 由于ListView安卓原生的点击事件在高版本系统上没有效果所以采用自定义的
+     */
+    public interface OnPhotosMenuDetailPagerAdapterLinstener{
+
+        /**
+         * 某个item被点击了
+         * @param position 对应的索引
+         * @param url 对应大图的url
+         */
+        void onItemClick(int position, String url);
     }
 
     static class ViewHolder{
@@ -308,7 +355,6 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         // 使用Volley发起请求
         VolleyManager.getImageLoader().get(imageurl, listener);
     }
-
 
     /**
      * 专门解析json的方法

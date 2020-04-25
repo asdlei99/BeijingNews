@@ -9,12 +9,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AndroidAndJs" />
+            <option value="$PROJECT_DIR$/ImageLoader_library" />
             <option value="$PROJECT_DIR$/LERefreshlistview" />
+            <option value="$PROJECT_DIR$/PhotoView_library" />
             <option value="$PROJECT_DIR$/PullToRefresh_library" />
             <option value="$PROJECT_DIR$/SlidingMenu_library" />
             <option value="$PROJECT_DIR$/ViewPagerIndicator_library" />
             <option value="$PROJECT_DIR$/VolleyDemo" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/okhttpsample" />
             <option value="$PROJECT_DIR$/xutils" />
           </set>
         </option>

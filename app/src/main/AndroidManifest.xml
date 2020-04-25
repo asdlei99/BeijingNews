@@ -4,7 +4,11 @@
     package="com.bobo.beijingnews">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- SD卡的写入权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- SD卡的读取权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- android:name=".BeijingNewsApplication" 创建了一定要在这里配置 -->
     <application
@@ -28,6 +32,8 @@
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.PageIndicatorDefaults" />
         <activity android:name=".activity.NewsDetailActivity"></activity>
+
+        <activity android:name=".activity.ShowImageActivity"/>
 
         <!-- 解决：java.lang.NoClassDefFoundError: Failed resolution of: Lorg/apache/http/c -->
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
