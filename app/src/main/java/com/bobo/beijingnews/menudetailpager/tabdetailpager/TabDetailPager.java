@@ -177,12 +177,12 @@ public class TabDetailPager extends MenuDetailBasePager{
             Log.e("newsData==id==",newsData.getId()+","+newsData.getTitle()+",url==="
                     +newsData.getUrl());
 
-            //用户点击过（阅读过）的新闻变灰 1.取出保存的id集合
-            String idArray = CacheUtils.getString(context,READ_ARRAY_ID);
+            // 用户点击过（阅读过）的新闻变灰 1.取出保存的id集合
+            String idArray = CacheUtils.getSPString(context,READ_ARRAY_ID);
 
-            //2.判断是否存在，如果不存在，才保存，并且刷新适配器
+            // 2.判断是否存在，如果不存在，才保存，并且刷新适配器
             if (!idArray.contains(newsData.getId()+"")){//3511,3512,3513
-                CacheUtils.putString(context,READ_ARRAY_ID,idArray+newsData.getId()+",");
+                CacheUtils.putSPString(context,READ_ARRAY_ID,idArray+newsData.getId()+",");
 
                 // 刷新适配器
                 adapter.notifyDataSetChanged();//刷新适配器会执行getCount() getView()
@@ -483,7 +483,7 @@ public class TabDetailPager extends MenuDetailBasePager{
             viewHolder.tv_time.setText(newsData.getPubdate());
 
             // 用户点击过（阅读过）的变成灰色
-            String idArray = CacheUtils.getString(context,READ_ARRAY_ID);
+            String idArray = CacheUtils.getSPString(context,READ_ARRAY_ID);
             if (idArray.contains(newsData.getId()+"")){
                 // 设置灰色
                 viewHolder.tv_title.setTextColor(Color.GRAY);

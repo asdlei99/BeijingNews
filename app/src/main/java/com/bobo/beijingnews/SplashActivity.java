@@ -106,7 +106,7 @@ public class SplashActivity extends Activity {
 
             startActivity(intent);
 
-            //关闭splash页面
+            // 关闭splash页面
             finish();
 
             //Toast.makeText(SplashActivity.this,"动画播放结束",Toast.LENGTH_SHORT).show();

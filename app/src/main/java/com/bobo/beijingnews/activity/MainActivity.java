@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.bobo.beijingnews.R;
 import com.bobo.beijingnews.fragment.ContentFragment;
@@ -35,6 +36,9 @@ public class MainActivity extends SlidingFragmentActivity {
     public static final String MAIN_CONTENT_TAG = "main_content_tag";
     //LeftmenuFragment 的 tag 标识
     public static final String LEFTMENU_TAG = "leftmenu_tag";
+
+    // 声明一个long类型变量：用于存放上一点击“返回键”的时刻
+    private long mExitTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,5 +115,22 @@ public class MainActivity extends SlidingFragmentActivity {
     //供外界调用获取右侧内容的方法
     public ContentFragment getContentFragment() {
         return  (ContentFragment) getSupportFragmentManager().findFragmentByTag(MAIN_CONTENT_TAG);
+    }
+
+    /**
+     * 用户点击了返回键 “再按一次退出程序”
+     */
+    @Override
+    public void onBackPressed() {
+        // 与上次点击返回键时刻作差
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            // 大于2000ms则认为是误操作，使用Toast进行提示
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            // 并记录下本次点击“返回键”的时刻，以便下次进行判断
+            mExitTime = System.currentTimeMillis();
+        } else {
+            // 小于2000ms则认为是用户确实希望退出程序-调用System.exit()方法进行退出
+            super.onBackPressed();
+        }
     }
 }

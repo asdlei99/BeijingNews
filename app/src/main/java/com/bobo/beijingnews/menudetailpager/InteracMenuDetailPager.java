@@ -1,6 +1,7 @@
 package com.bobo.beijingnews.menudetailpager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.bobo.beijingnews.R;
+import com.bobo.beijingnews.activity.ShowImageActivity;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.domain.PhotosMenuDetailPagerBean;
@@ -52,7 +54,7 @@ import static com.bobo.beijingnews.utils.NetcacheUtils.FAIL;
 
 /**
  * Created by 求知自学网 on 2019/7/27. Copyright © Leon. All rights reserved.
- * Functions: 新闻中心下： 互动菜单页面
+ * Functions: 新闻中心下： 互动 菜单页面
  */
 public class InteracMenuDetailPager extends MenuDetailBasePager {
 
@@ -84,6 +86,11 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
      * (图片)三级缓存工具类
      */
     private BitmapCacheUtils bitmapCacheUtils;
+
+    /**
+     * ListView和GridView的适配器的点击事件
+     */
+    private  OnPhotosMenuDetailPagerAdapterLinstener mOnPhotosAdapterLinstener;
 
     /**
      * 用于图片三级缓存子线程切换到主线程
@@ -143,6 +150,19 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
 
         // 使用xUtils 初始化布局
         x.view().inject(InteracMenuDetailPager.this, view);
+
+        // 设置点击某条的item的监听
+        mOnPhotosAdapterLinstener = new OnPhotosMenuDetailPagerAdapterLinstener() {
+            @Override
+            public void onItemClick(int position, String largeImageUrl) {
+                // 跳转到查看大图Activity
+                Intent intent = new Intent(context, ShowImageActivity.class);
+                // 跳转携带参数
+                intent.putExtra("url", largeImageUrl);
+                context.startActivity(intent);
+            }
+        };
+
         return view;
     }
 
@@ -317,7 +337,7 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             PhotosMenuDetailPager.ViewHolder viewHolder;
 
@@ -371,8 +391,34 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(imageUrl,
                     viewHolder.iv_icon, options);
 
+            // 获取用于全屏展示的大图的路径
+            final String largeImageUrl = Constants.BASE_URL + newsBean.getLargeimage();
+
+            // 由于ListView安卓原生的点击事件在高版本系统上没有效果所以采用自定义的
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnPhotosAdapterLinstener != null) {
+                        mOnPhotosAdapterLinstener.onItemClick(position, largeImageUrl);
+                    }
+                }
+            });
+
             return convertView;
         }
+    }
+
+    /**
+     * 由于ListView安卓原生的点击事件在高版本系统上没有效果所以采用自定义的
+     */
+    public interface OnPhotosMenuDetailPagerAdapterLinstener{
+
+        /**
+         * 某个item被点击了
+         * @param position 对应的索引
+         * @param url 对应大图的url
+         */
+        void onItemClick(int position, String url);
     }
 
     static class ViewHolder{

@@ -116,7 +116,7 @@ public class GuideActivity extends Activity {
         //得到viewpager屏幕滑动的百分比
         viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
 
-        //设置按钮的点击事件
+        // 设置按钮的点击事件
         btn_start_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

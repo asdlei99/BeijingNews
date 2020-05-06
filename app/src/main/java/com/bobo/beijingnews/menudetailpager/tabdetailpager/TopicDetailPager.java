@@ -1,6 +1,8 @@
 package com.bobo.beijingnews.menudetailpager.tabdetailpager;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -8,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,11 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bobo.beijingnews.R;
+import com.bobo.beijingnews.activity.NewsDetailActivity;
 import com.bobo.beijingnews.base.MenuDetailBasePager;
 import com.bobo.beijingnews.domain.NewsCenterPagerBean2;
 import com.bobo.beijingnews.domain.TabDetailPagerBean;
 import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
+import com.bobo.beijingnews.utils.IsNotFastClickUtils;
 import com.bobo.beijingnews.utils.LogUtil;
 import com.bobo.beijingnews.view.HorizontalScrollViewPager;
 import com.bumptech.glide.Glide;
@@ -89,6 +94,11 @@ public class TopicDetailPager extends MenuDetailBasePager{
      */
     private boolean isLoadMore = false;
 
+    /**
+     * 用于本地持久化保存用户是否阅读过的key
+     */
+    private static final String TOPIC_READ_ARRAY_ID = "TOPIC_READ_ARRAY_ID";
+
     // PullToRefreshListView下拉刷新上拉加载更多的ListView
     private PullToRefreshListView mPullToRefreshListView;
 
@@ -137,12 +147,15 @@ public class TopicDetailPager extends MenuDetailBasePager{
         viewpager = (HorizontalScrollViewPager)topNewsView.findViewById(R.id.viewpager);
         //轮播图上的标题
         tv_title = (TextView)topNewsView.findViewById(R.id.tv_title);
-        //轮播图上的指示器小点
+        // 轮播图上的指示器小点
         ll_point_group = (LinearLayout)topNewsView.findViewById(R.id.ll_point_group);
 
         //把顶部轮播图部分视图以“头”的方式添加到list view中
         //listview.addTopNewsView(topNewsView);
         listview.addHeaderView(topNewsView);
+
+        // 设置listview item的点击事件的监听
+        listview.setOnItemClickListener(new MyOnItemClickListener());
 
 
         //设置监听下拉刷新上拉加载更多
@@ -172,6 +185,41 @@ public class TopicDetailPager extends MenuDetailBasePager{
         return view;
     }
 
+    // 采用内部类实现listview item的点击事件监听
+    class MyOnItemClickListener implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            //避免重复点击开启重复的页面
+            if (!IsNotFastClickUtils.isFastClick()){return;};
+
+            // 这里要-1 是因为 0 其实是banner图 第三方的加载框架要-2
+            int realPosition = position - 2;
+
+            TabDetailPagerBean.DataBean.NewsData newsData = news.get(realPosition);
+            //Toast.makeText(context,"newsData==id=="+newsData.getId()+","+
+            // newsData.getTitle(),Toast.LENGTH_SHORT).show();
+            Log.e("newsData==id==",newsData.getId()+","+newsData.getTitle()+",url==="
+                    +newsData.getUrl());
+
+            // 用户点击过（阅读过）的新闻变灰 1.取出保存的id集合
+            String idArray = CacheUtils.getSPString(context,TOPIC_READ_ARRAY_ID);
+
+            // 2.判断是否存在，如果不存在，才保存，并且刷新适配器
+            if (!idArray.contains(newsData.getId()+"")){//3511,3512,3513
+                CacheUtils.putSPString(context,TOPIC_READ_ARRAY_ID,idArray+newsData.getId()+",");
+
+                // 刷新适配器
+                adapter.notifyDataSetChanged();//刷新适配器会执行getCount() getView()
+            }
+
+            // 跳转到新闻浏览（详情）页面
+            Intent intent = new Intent(context,NewsDetailActivity.class);
+            intent.putExtra("url",Constants.BASE_URL+newsData.getUrl());
+            context.startActivity(intent);
+        }
+    }
 //    //采用内部类的方式实现下拉刷新接口的监听
 //    class MyOnRefreshListene implements RefreshListview.OnRefreshListener{
 //
@@ -358,7 +406,7 @@ public class TopicDetailPager extends MenuDetailBasePager{
         }
     }
 
-    //内部类 新闻列表list view的适配器
+    // 内部类 新闻列表list view的适配器
     class TabDetailPagerListAdapter extends BaseAdapter{
 
         @Override
@@ -409,6 +457,16 @@ public class TopicDetailPager extends MenuDetailBasePager{
 
             //设置 时间
             viewHolder.tv_time.setText(newsData.getPubdate());
+
+            // 用户点击过（阅读过）的变成灰色
+            String idArray = CacheUtils.getSPString(context,TOPIC_READ_ARRAY_ID);
+            if (idArray.contains(newsData.getId()+"")){
+                // 设置灰色
+                viewHolder.tv_title.setTextColor(Color.GRAY);
+            }else{
+                // 设置黑色
+                viewHolder.tv_title.setTextColor(Color.BLACK);
+            }
 
             return convertView;
         }
@@ -478,7 +536,7 @@ public class TopicDetailPager extends MenuDetailBasePager{
         }
     }
 
-    //内部类适配器 banner ViewPager的适配器
+    // 内部类适配器 banner ViewPager的适配器
     class TabDeailPagerTopNewsAdapter extends PagerAdapter{
 
         @Override

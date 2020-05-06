@@ -6,7 +6,7 @@ package com.bobo.beijingnews.utils;
  */
 public class Constants {
 
-    //本地（自己电脑上）搭建服务器 模拟器请求可以用这个地址
+    // 本地（自己电脑上）搭建服务器 模拟器请求可以用这个地址
     //public static final String BASE_URL = "https://10.0.2.2:8080/web_home";
 
     /**联网请求的主路径*/

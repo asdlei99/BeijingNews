@@ -49,6 +49,28 @@ public class CacheUtils {
      * @param key
      * @param value
      */
+    public static void putSPString(Context context, String key, String value){
+        SharedPreferences sp = context.getSharedPreferences("atguigu",Context.MODE_PRIVATE);
+        sp.edit().putString(key,value).commit();
+    }
+
+    /**
+     * （根据key）得到本地持久化保存的String值
+     * @param context 上下文
+     * @param key 必须是string类型
+     * @return
+     */
+    public static String getSPString(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences("atguigu",Context.MODE_PRIVATE);
+        return sp.getString(key,"");
+    }
+
+    /**
+     * 根据key持久化保存软件的String值参数  磁盘 + SharedPreferences
+     * @param context
+     * @param key
+     * @param value
+     */
     public static void putString(Context context, String key, String value) {
 
         // 判断sdcard是否存在（可用）
@@ -95,7 +117,7 @@ public class CacheUtils {
     }
 
     /**
-     * （根据key）得到本地持久化保存的String值
+     * （根据key）得到本地持久化保存的String值 磁盘 + SharedPreferences
      * @param context 上下文
      * @param key 必须是string类型
      * @return

@@ -45,4 +45,7 @@ dependencies {
 
     // 点击查看大图第三方框架
     implementation project(':PhotoView_library')
+
+    // 加载提示框带动画的loding...
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 }

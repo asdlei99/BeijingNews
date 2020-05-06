@@ -31,9 +31,11 @@ import com.bobo.beijingnews.menudetailpager.VoteMenuDetailPager;
 import com.bobo.beijingnews.utils.CacheUtils;
 import com.bobo.beijingnews.utils.Constants;
 import com.bobo.beijingnews.utils.LogUtil;
+import com.bobo.beijingnews.view.LEloadingView;
 import com.bobo.beijingnews.volley.VolleyManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +65,11 @@ public class NewsCenterPager extends BasePager {
      */
     private long startTime;
 
+    /**
+     * 自定义Leon特色的加载loading...
+     */
+    private KProgressHUD mProgressHUD;
+
 
     public NewsCenterPager(Context context) {
         super(context);
@@ -78,7 +85,7 @@ public class NewsCenterPager extends BasePager {
         ib_menu.setVisibility(View.VISIBLE);
 
         //1.设置标题
-        tv_title.setText("新闻中心");
+        tv_title.setText("新闻");
 
         // 2.联网请求，得到数据，创建视图
         // TextView textView = new TextView(context);
@@ -101,6 +108,11 @@ public class NewsCenterPager extends BasePager {
         }
 
         // TODO:加载框显示
+        mProgressHUD = KProgressHUD.create(context)
+                                     .setCustomView(new LEloadingView(context))
+                                     .setLabel("Please wait", Color.GRAY)
+                                     .setBackgroundColor(Color.WHITE)
+                                     .show();
 
         startTime = SystemClock.uptimeMillis();
 
@@ -195,22 +207,35 @@ public class NewsCenterPager extends BasePager {
                 //缓存数据本地持久化保存
                 CacheUtils.putString(context, Constants.NEWSCENTER_PAGER_URL, result);
 
+
+                // 无论成功或是失败加载框都应消失
+                mProgressHUD.dismiss();
+
                 processData(result);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 LogUtil.e("用xUtils3 联网请求失败 ："+ex.getMessage());
+
+                // 无论成功或是失败加载框都应消失
+                mProgressHUD.dismiss();
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
                 LogUtil.e("用xUtils3 onCancelled ："+cex.getMessage());
+
+                // 无论成功或是失败加载框都应消失
+                mProgressHUD.dismiss();
             }
 
             @Override
             public void onFinished() {
                 LogUtil.e("用xUtils3 onFinished()");
+
+                // 无论成功或是失败加载框都应消失
+                mProgressHUD.dismiss();
             }
         });
     }

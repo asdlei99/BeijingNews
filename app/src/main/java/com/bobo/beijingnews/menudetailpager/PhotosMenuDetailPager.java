@@ -40,7 +40,7 @@ import java.util.List;
 
 /**
  * Created by 求知自学网 on 2019/7/27. Copyright © Leon. All rights reserved.
- * Functions: 新闻中心下： 图组菜单页面
+ * Functions: 新闻中心下： 组图 菜单页面
  */
 public class PhotosMenuDetailPager extends MenuDetailBasePager {
 
