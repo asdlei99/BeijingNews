@@ -35,6 +35,8 @@ public class VoteMenuDetailPager extends MenuDetailBasePager {
     @Override
     public void initData() {
         super.initData();
+
+        // TODO:策划学原理（投票）
         LogUtil.e("投票详情页面数据被初始化了...");
         textView.setText("投票详情页面的内容");
     }
