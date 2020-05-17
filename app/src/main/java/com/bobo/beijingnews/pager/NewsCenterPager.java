@@ -105,9 +105,12 @@ public class NewsCenterPager extends BasePager {
         //如果有缓存数据先显示缓存数据（而后再请求网络）不至于 空白
         if (!TextUtils.isEmpty(saveJson)){
             processData(saveJson);
+
+            // FIXME:2020-050-17有缓存就解析缓存，不要再网络请求了
+            return;
         }
 
-        // TODO:加载框显示
+        // 加载框显示
         mProgressHUD = KProgressHUD.create(context)
                                      .setCustomView(new LEloadingView(context))
                                      .setLabel("Please wait", Color.GRAY)
@@ -242,6 +245,12 @@ public class NewsCenterPager extends BasePager {
 
     /**解析json数据和显示数据*/
     private void processData(String json) {
+
+        // FIXME:2020-050-17 有缓存就解析缓存，不要再网络请求了
+        if (detailBasePagers != null && detailBasePagers.size() > 0) {
+            return;
+        }
+
         NewsCenterPagerBean2 bean = parsedJson2(json);
 
         //给左侧菜单传递数据

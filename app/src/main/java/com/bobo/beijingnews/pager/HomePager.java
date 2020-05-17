@@ -15,7 +15,7 @@ import com.bobo.beijingnews.utils.LogUtil;
 
 /**
  * Created by 求知自学网 on 2019/7/20. Copyright © Leon. All rights reserved.
- * Functions: 首页
+ * Functions: 首页-对应《现代管理学》的考题
  */
 public class HomePager extends BasePager {
 

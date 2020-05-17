@@ -35,7 +35,7 @@
         <RadioButton
             style="@style/bottom_tag_style"
             android:drawableTop="@drawable/rb_smartservice_drawable_selector"
-            android:text="智慧"
+            android:text="项目"
             android:id="@+id/rb_smartservice"
             android:gravity="center"/>
 
