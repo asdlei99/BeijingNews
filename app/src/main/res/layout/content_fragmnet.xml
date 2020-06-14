@@ -39,6 +39,7 @@
             android:id="@+id/rb_smartservice"
             android:gravity="center"/>
 
+        <!-- 市场调查与分析 -->
         <RadioButton
             style="@style/bottom_tag_style"
             android:drawableTop="@drawable/rb_govaffair_drawable_selector"
