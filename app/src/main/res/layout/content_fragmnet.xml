@@ -49,7 +49,7 @@
         <RadioButton
             style="@style/bottom_tag_style"
             android:drawableTop="@drawable/rb_setting_drawable_selector"
-            android:text="设置"
+            android:text="运营"
             android:id="@+id/rb_setting"
             android:gravity="center"/>
 
