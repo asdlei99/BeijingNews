@@ -9,8 +9,19 @@
 <img src="https://github.com/leonInShanghai/BeijingNews/blob/master/app/src/main/res/drawable-hdpi/splash_sheep_newyear.png?raw=true"
 style="border: 1px solid #ff0000;"/>
 </div>
+</br>
 
+<div align="center">
+<img src="https://github.com/leonInShanghai/BeijingNews/blob/master/OtherAndPicture/dome_1.gif"
+style="border: 1px solid #ff0000;"/>
+</div>
+</br>
 
+<div align="center">
+<img src="https://github.com/leonInShanghai/BeijingNews/blob/master/OtherAndPicture/dome_2.gif"
+style="border: 1px solid #ff0000;"/>
+</div>
+</br>
 
 <h5>LERefreshlistview 自定义ListView下拉刷新上拉加载更多</h5><a href="https://www.jianshu.com/p/0de78842493a">使用</a>
 
