@@ -23,6 +23,20 @@ style="border: 1px solid #ff0000;"/>
 </div>
 </br>
 
+<h5>国内示例GIF图：</h5>
+
+<div align="center">
+<img src="https://upload-images.jianshu.io/upload_images/15555141-65f8004ae678d905.gif?imageMogr2/auto-orient/strip"
+style="border: 1px solid #ff0000;"/>
+</div>
+</br>
+
+<div align="center">
+<img src="https://upload-images.jianshu.io/upload_images/15555141-240f5d4243b8da0c.gif?imageMogr2/auto-orient/strip"
+style="border: 1px solid #ff0000;"/>
+</div>
+</br>
+
 <h5>LERefreshlistview 自定义ListView下拉刷新上拉加载更多</h5><a href="https://www.jianshu.com/p/0de78842493a">使用</a>
 
 <div align="center">
