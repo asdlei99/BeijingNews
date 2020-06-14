@@ -1,0 +1,4 @@
+#Sat Apr 25 12:37:22 CST 2020
+base.0=D\:\\AndroidCode\\BeijingNews\\VolleyDemo\\build\\intermediates\\transforms\\dexMerger\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

@@ -48,4 +48,7 @@ dependencies {
 
     // 加载提示框带动画的loding...
     implementation 'com.kaopiz:kprogresshud:1.2.0'
+
+    // Android 加载PDF框架
+    implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
 }

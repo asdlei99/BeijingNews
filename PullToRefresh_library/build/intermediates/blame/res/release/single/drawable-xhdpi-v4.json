@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\default_ptr_flip.png",
+        "source": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\src\\main\\res\\drawable-xhdpi\\default_ptr_flip.png"
+    },
+    {
+        "merged": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\src\\main\\res\\drawable-xhdpi\\indicator_arrow.png"
+    },
+    {
+        "merged": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\src\\main\\res\\drawable-xhdpi\\default_ptr_rotate.png"
+    }
+]

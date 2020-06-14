@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.bobo.beijingnews.base.MenuDetailBasePager;
@@ -23,21 +26,27 @@ public class VoteMenuDetailPager extends MenuDetailBasePager {
 
     @Override
     public View initView() {
+
+        // 加载webview
+        WebView webView = new WebView(context);
+
+        // 使用Java代码设置宽高布局
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams
+                .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        webView.setLayoutParams(layoutParams);
+
+        // 允许js运行
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        // 加载本地assets文件夹中自己写的H5页面
+        webView.loadUrl("file:///android_asset/study/principles_of_planning.html");
         
-        textView = new TextView(context);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        textView.setTextSize(25);
-        
-        return textView;
+        return webView;
     }
 
     @Override
     public void initData() {
         super.initData();
-
-        // TODO:策划学原理（投票）
-        LogUtil.e("投票详情页面数据被初始化了...");
-        textView.setText("投票详情页面的内容");
     }
 }

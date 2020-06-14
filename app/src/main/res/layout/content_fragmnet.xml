@@ -42,7 +42,7 @@
         <RadioButton
             style="@style/bottom_tag_style"
             android:drawableTop="@drawable/rb_govaffair_drawable_selector"
-            android:text="政要"
+            android:text="市调"
             android:id="@+id/rb_govaffair"
             android:gravity="center"/>
 

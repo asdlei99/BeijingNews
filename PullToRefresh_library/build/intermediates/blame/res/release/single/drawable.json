@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_bg_top.xml",
+        "source": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\src\\main\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\build\\intermediates\\res\\merged\\release\\drawable\\indicator_bg_bottom.xml",
+        "source": "D:\\AndroidCode\\BeijingNews\\PullToRefresh_library\\src\\main\\res\\drawable\\indicator_bg_bottom.xml"
+    }
+]
