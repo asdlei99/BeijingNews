@@ -41,7 +41,7 @@ public class SettingPager extends BasePager {
         pdfView.setLayoutParams(layoutParams);
 
         // computation_revision
-        pdfView.fromAsset("conference_operations_managementgitgg.pdf")   //设置pdf文件地址
+        pdfView.fromAsset("conference_operations_management.pdf")   //设置pdf文件地址
                 .defaultPage(1)         //设置默认显示第1页
                 // .onPageChange(this)     //设置翻页监听
                 // .onLoad(this)           //设置加载监听
